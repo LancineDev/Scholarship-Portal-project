@@ -51,8 +51,8 @@ const ContactUs = () => {
                                 </div>
                                 <div className="ml-6 grow">
                                     <p className="mb-2 font-bold">Technical support</p>
-                                    <p className="text-neutral-500">support@mail.com</p>
-                                    <p className="text-neutral-500">01234567890</p>
+                                    <p className="text-neutral-500">klancine011@mail.com</p>
+                                    <p className="text-neutral-500">0712129409/0710758249</p>
                                 </div>
                             </div>
                         </div>
@@ -71,8 +71,8 @@ const ContactUs = () => {
                                 </div>
                                 <div className="ml-6 grow">
                                     <p className="mb-2 font-bold">Scholarship questions</p>
-                                    <p className="text-neutral-500">scholarship@mail.com</p>
-                                    <p className="text-neutral-500">01234567890</p>
+                                    <p className="text-neutral-500">klancine011@mail.com</p>
+                                    <p className="text-neutral-500">0712129409/0710758249</p>
                                 </div>
                             </div>
                         </div>
@@ -91,8 +91,8 @@ const ContactUs = () => {
                                 </div>
                                 <div className="ml-6 grow">
                                     <p className="mb-2 font-bold">Press</p>
-                                    <p className="text-neutral-500">press@mail.com</p>
-                                    <p className="text-neutral-500">01234567890</p>
+                                    <p className="text-neutral-500">klancine011@mail.com</p>
+                                    <p className="text-neutral-500">0712129409/0710758249</p>
                                 </div>
                             </div>
                         </div>
@@ -111,8 +111,8 @@ const ContactUs = () => {
                                 </div>
                                 <div className="ml-6 grow">
                                     <p className="mb-2 font-bold">Bug report</p>
-                                    <p className="text-neutral-500">bugs@mail.com</p>
-                                    <p className="text-neutral-500">01234567890</p>
+                                    <p className="text-neutral-500">klancine011@mail.com</p>
+                                    <p className="text-neutral-500">0712129409/0710758249</p>
                                 </div>
                             </div>
                         </div>

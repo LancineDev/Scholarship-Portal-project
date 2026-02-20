@@ -1,28 +1,43 @@
 import { useEffect, useState } from "react";
-import useAxiosPublic from "./useAxiosPublic";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase.config";
 
 const useUserRole = (userEmail) => {
     const [role, setRole] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const axiosPublic = useAxiosPublic();
 
     useEffect(() => {
         const fetchUserRole = async () => {
+            if (!userEmail) {
+                setLoading(false);
+                return;
+            }
+
             setLoading(true);
             try {
-                const response = await axiosPublic.get(`/user-role/${userEmail}`);
-                setRole(response.data.role);
-            } catch (error) {
-                setError(error);
+                console.log("🔍 Fetching role for:", userEmail);
+                const userDocRef = doc(db, "users", userEmail);
+                const userDoc = await getDoc(userDocRef);
+                
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    console.log("✅ User data found:", userData);
+                    setRole(userData.role || "");
+                } else {
+                    console.log("❌ No user document found for:", userEmail);
+                    setRole("");
+                }
+            } catch (err) {
+                console.error("❌ Error fetching user role:", err);
+                setError(err);
+            } finally {
+                setLoading(false);
             }
-            setLoading(false);
         };
 
-        if (userEmail) {
-            fetchUserRole();
-        }
-    }, [userEmail, axiosPublic]);
+        fetchUserRole();
+    }, [userEmail]);
 
     return { role, loading, error };
 };

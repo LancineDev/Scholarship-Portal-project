@@ -13,7 +13,7 @@ const Footer = () => {
                             <p className="ml-2 text-xl tracking-wide text-primary-800 uppercase font-medium"><span className="font-extrabold">Scholarship</span> Portal</p>
                         </Link>
                         <div className="mt-6 lg:max-w-sm text-sm text-gray-500">
-                            <p>Scholarship Portal is the most powerful next-gen scholarship platform for Bangladesh.</p>
+                            <p>Scholarship Portal is the most powerful next-gen scholarship platform for Côte d'Ivoire.</p>
                             <p className="mt-4">Providing information about international financial aid &amp; scholarships since 2024.</p>
                         </div>
                     </div>
@@ -24,19 +24,19 @@ const Footer = () => {
                         {/* Phone */ }
                         <div className="flex">
                             <p className="mr-1 text-gray-500">Phone:</p>
-                            <a href="tel:01234567890" aria-label="Our phone" title="Our phone" className="transition-colors duration-300 hover:text-primary-700">01234567890</a>
+                            <a href="tel:01234567890" aria-label="Our phone" title="Our phone" className="transition-colors duration-300 hover:text-primary-700">0712129409/0710758249</a>
                         </div>
 
                         {/* Email */ }
                         <div className="flex">
                             <p className="mr-1 text-gray-500">Email:</p>
-                            <a href="mailto:info@lorem.mail" aria-label="Our email" title="Our email" className="transition-colors duration-300 hover:text-primary-700">scholarshipportal@mail.com</a>
+                            <a href="mailto:info@lorem.mail" aria-label="Our email" title="Our email" className="transition-colors duration-300 hover:text-primary-700">klancine011@mail.com</a>
                         </div>
 
                         {/* Address */ }
                         <div className="flex">
                             <p className="mr-1 text-gray-500">Address:</p>
-                            <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" aria-label="Our address" title="Our address" className="transition-colors duration-300 hover:text-primary-700">Gulshan, Dhaka</a>
+                            <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" aria-label="Our address" title="Our address" className="transition-colors duration-300 hover:text-primary-700">Abidjan , Côte d'Ivoire</a>
                         </div>
                     </div>
 

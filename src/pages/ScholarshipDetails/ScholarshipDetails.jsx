@@ -32,8 +32,19 @@ const ScholarshipDetails = () => {
         </div>
     );
 
-    return (
-        <>
+        // Helper: extract first link from HTML string
+        function extractFirstLink(html) {
+            const match = html && html.match(/href=["']([^"']+)["']/i);
+            return match && match[1] && match[1].startsWith('http') ? match[1] : null;
+        }
+
+        const fallbackLink = extractFirstLink(scholarship.scholarship_description);
+        const applyLink = scholarship.official_link && scholarship.official_link.startsWith('http')
+            ? scholarship.official_link
+            : fallbackLink;
+
+        return (
+                <>
             <Helmet>
                 <title>{scholarship.university_name} | Scholarship Details</title>
                 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -412,14 +423,20 @@ const ScholarshipDetails = () => {
                                 </div>
                             </div>
 
-                            <a
-                                href={scholarship.official_link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="sd-btn-apply"
-                            >
-                                Apply on Official Website ↗
-                            </a>
+                                                        {applyLink ? (
+                                                            <a
+                                                                href={applyLink}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="sd-btn-apply"
+                                                            >
+                                                                Apply on Official Website ↗
+                                                            </a>
+                                                        ) : (
+                                                            <button className="sd-btn-apply opacity-60 cursor-not-allowed" disabled>
+                                                                Official link unavailable
+                                                            </button>
+                                                        )}
 
                             <Link to={`/assistance/${scholarship._id}`} className="sd-btn-assist">
                                 Need Assistance?

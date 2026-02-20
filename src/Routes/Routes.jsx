@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import ScholarshipDetails from "../pages/ScholarshipDetails/ScholarshipDetails";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import Payment from "../pages/Payment/Payment";
+import AssistanceService from "../pages/AssistanceService";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import AddScholarship from "../pages/Dashboard/Admin/AddScholarship/AddScholarship";
 import ManageScholarships from "../pages/Dashboard/Admin/ManageScholarships/ManageScholarships";
@@ -47,7 +48,15 @@ export const router = createBrowserRouter([
                 </PrivateRoute>,
             },
             {
+                path: "assistance/:id",
+                element: <AssistanceService />,
+            },
+            {
                 path: "payment/:id",
+                element: <Payment />,
+            },
+            {
+                path: "payment-assistance",
                 element: <Payment />,
             },
         ],

@@ -2,6 +2,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Helmet } from "react-helmet-async";
 import CheckOutForm from "./CheckOutForm";
+import AlternativePayment from "./AlternativePayment";
 import { useLocation } from "react-router-dom";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_KEY);
@@ -16,6 +17,7 @@ const Payment = () => {
     const subjectCategory = searchParams.get("subjectCategory") || "";
 
     const totalAmount = (applicationFees + serviceCharge);
+    const paymentMethod = searchParams.get("paymentMethod") || "card";
 
     return (
         <div>
@@ -32,15 +34,27 @@ const Payment = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
                     <div className="lg:col-span-2">
-                        <Elements stripe={ stripePromise }>
-                            <CheckOutForm totalAmount={ totalAmount }
+                        { paymentMethod === "card" ? (
+                            <Elements stripe={ stripePromise }>
+                                <CheckOutForm totalAmount={ totalAmount }
+                                    universityName={ universityName }
+                                    scholarshipCategory={ scholarshipCategory }
+                                    subjectCategory={ subjectCategory }
+                                    applicationFees={ applicationFees }
+                                    serviceCharge={ serviceCharge }
+                                />
+                            </Elements>
+                        ) : (
+                            <AlternativePayment
+                                method={ paymentMethod }
+                                totalAmount={ totalAmount }
                                 universityName={ universityName }
                                 scholarshipCategory={ scholarshipCategory }
                                 subjectCategory={ subjectCategory }
                                 applicationFees={ applicationFees }
                                 serviceCharge={ serviceCharge }
                             />
-                        </Elements>
+                        ) }
                     </div>
 
                     <div className="bg-accent-50 border border-primary-200 p-6 rounded text-gray-600 lg:col-span-1">

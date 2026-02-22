@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <>
             <Helmet>
-                <title>Scholarship Portal | Home</title>
+                <title>10Bourse | Accueil</title>
             </Helmet>
             
             <Banner />

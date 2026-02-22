@@ -61,16 +61,16 @@ const NavBar = () => {
 
                 {/* Navigation Links */ }
                 <nav className={ `flex-col pb-4 md:pb-0 md:flex md:justify-end md:flex-row md:items-center ${open ? "flex" : "hidden"}` }>
-                    <NavLink to="/" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded md:mt-0 md:ml-4 hover:text-primary-600 hover:bg-primary-100" style={ ({ isActive }) => (isActive ? activeLinkStyle : {}) }>Home</NavLink>
+                    <NavLink to="/" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded md:mt-0 md:ml-4 hover:text-primary-600 hover:bg-primary-100" style={ ({ isActive }) => (isActive ? activeLinkStyle : {}) }>Accueil</NavLink>
 
-                    <NavLink to="/all-scholarship" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded focus:text-primary-600 md:mt-0 md:ml-4 hover:text-primary-600 hover:bg-primary-100 focus:bg-primary-100 focus:outline-none focus:shadow-outline" style={ ({ isActive }) => (isActive ? activeLinkStyle : {}) }>All Scholarship</NavLink>
+                    <NavLink to="/all-scholarship" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded focus:text-primary-600 md:mt-0 md:ml-4 hover:text-primary-600 hover:bg-primary-100 focus:bg-primary-100 focus:outline-none focus:shadow-outline" style={ ({ isActive }) => (isActive ? activeLinkStyle : {}) }>Toutes les Bourses</NavLink>
 
-                    <NavLink to="/dashboard/profile" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded focus:text-primary-600 md:mt-0 md:ml-4 hover:text-primary-600 hover:bg-primary-100 focus:bg-primary-100 focus:outline-none focus:shadow-outline" style={ ({ isActive }) => (isActive ? activeLinkStyle : {}) }>Dashboard</NavLink>
+                    <NavLink to="/dashboard/profile" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded focus:text-primary-600 md:mt-0 md:ml-4 hover:text-primary-600 hover:bg-primary-100 focus:bg-primary-100 focus:outline-none focus:shadow-outline" style={ ({ isActive }) => (isActive ? activeLinkStyle : {}) }>Tableau de Bord</NavLink>
 
                     {/* Login or Logout Button */ }
                     {
-                        user ? <div onClick={ handleLogout } className="mt-4 md:mt-0 md:ml-4"><SecondaryButton>Logout</SecondaryButton></div> : <Link to="/login" className="mt-4 md:mt-0 md:ml-4">
-                            <PrimaryButton>Login</PrimaryButton>
+                        user ? <div onClick={ handleLogout } className="mt-4 md:mt-0 md:ml-4"><SecondaryButton>Déconnexion</SecondaryButton></div> : <Link to="/login" className="mt-4 md:mt-0 md:ml-4">
+                            <PrimaryButton>Connexion</PrimaryButton>
                         </Link>
                     }
                 </nav>

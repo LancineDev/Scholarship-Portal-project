@@ -11,8 +11,8 @@ const ErrorPage = () => {
         <div className="flex items-center justify-center w-full min-h-screen py-8 page md:py-16 bg-accent-100">
             <div className="relative flex flex-col items-center w-full gap-8 px-8 md:px-18 xl:px-40 md:gap-16">
                 <p className="text-9xl md:text-[300px] w-full select-none text-center font-black text-gray-400">404</p>
-                <p className="text-2xl font-bold capitalize">You have discovered a secret place</p>
-                <p className="text-xl font-medium break-words">Unfortunately, this is only a 404 page. You may have mistyped the address, or the page has been moved to another URL.</p>
+                <p className="text-2xl font-bold capitalize">Vous avez découvert un endroit secret</p>
+                <p className="text-xl font-medium break-words">Malheureusement, ce n'est qu'une page 404. Vous pouvez avoir mal tapé l'adresse ou la page a été déplacée vers une autre URL.</p>
 
                 {/* Go back buttons */ }
                 <div className="flex flex-col justify-between w-full gap-8 md:flex-row md:gap-32 xl:px-16">

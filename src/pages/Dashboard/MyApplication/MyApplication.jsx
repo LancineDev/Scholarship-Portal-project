@@ -107,10 +107,10 @@ const MyApplication = () => {
     return (
         <>
             <Helmet>
-                <title>Dashboard | My Applications</title>
+                <title>Tableau de Bord | Mes Candidatures</title>
             </Helmet>
 
-            <Title title="My Applications" />
+            <Title title="Mes Candidatures" />
 
             <div>
                 <div className="p-4 flex">

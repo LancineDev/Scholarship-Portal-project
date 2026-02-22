@@ -166,10 +166,10 @@ const AddScholarship = () => {
     return (
         <>
             <Helmet>
-                <title>Dashboard | Add Scholarship</title>
+                <title>Tableau de Bord | Ajouter une Bourse</title>
             </Helmet>
 
-            <Title title="Add Scholarship" />
+            <Title title="Ajouter une Bourse" />
 
             {
                 loading && <Loading />
@@ -177,21 +177,21 @@ const AddScholarship = () => {
 
             <form onSubmit={ handleSubmit } className="grid grid-cols-1 md:grid-cols-2 gap-x-6 px-3 py-4">
                 <ScholarshipFormInput
-                    label="Scholarship Name"
+                    label="Nom de la Bourse"
                     value={ formData.scholarshipName }
                     onChange={ handleChange }
                     name="scholarshipName"
                     required
                 />
                 <ScholarshipFormInput
-                    label="University Name"
+                    label="Nom de l'Université"
                     value={ formData.universityName }
                     onChange={ handleChange }
                     name="universityName"
                     required
                 />
                 <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-500">University Logo (File)</label>
+                    <label className="block text-sm font-medium text-gray-500">Logo Université (Fichier)</label>
                     <input
                         type="file"
                         accept="image/*"

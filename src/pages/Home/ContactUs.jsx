@@ -6,7 +6,7 @@ const ContactUs = () => {
         <section className="container my-16 mx-auto px-2 md:px-4">
             <div className="flex justify-center">
                 <div className="text-center md:max-w-xl lg:max-w-3xl">
-                    <Title title="Contact Us" />
+                    <Title title="Nous Contacter" />
                 </div>
             </div>
 

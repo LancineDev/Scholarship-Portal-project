@@ -80,7 +80,7 @@ const Login = () => {
     return (
         <>
             <Helmet>
-                <title>Scholarship Portal | Login</title>
+                <title>10Bourse | Connexion</title>
             </Helmet>
 
             <section className="bg-accent-200">

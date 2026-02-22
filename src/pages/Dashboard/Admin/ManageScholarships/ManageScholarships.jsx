@@ -98,13 +98,13 @@ const ManageScholarships = () => {
     return (
         <>
             <Helmet>
-                <title>Dashboard | Manage Scholarships</title>
+                <title>Tableau de Bord | Gérer les Bourses</title>
             </Helmet>
 
-            <Title title="Manage Scholarships" />
+            <Title title="Gérer les Bourses" />
 
             <div className="p-4 flex">
-                <h1 className="text-2xl">Total Scholarships: { scholarships.length }</h1>
+                <h1 className="text-2xl">Total des Bourses: { scholarships.length }</h1>
             </div>
 
             <div className="px-3 py-4 flex overflow-scroll">
@@ -112,11 +112,11 @@ const ManageScholarships = () => {
                     <tbody>
                         <tr className="border-b border-accent-100">
                             <th className="p-2"></th>
-                            <th className="text-left p-3 px-5">Scholarship Category</th>
-                            <th className="text-left p-3 px-5">University Name</th>
-                            <th className="text-left p-3 px-5">Subject Category</th>
-                            <th className="text-left p-3 px-5">Degree</th>
-                            <th className="text-left p-3 px-5">Application Fees</th>
+                            <th className="text-left p-3 px-5">Catégorie de Bourse</th>
+                            <th className="text-left p-3 px-5">Nom de l'Université</th>
+                            <th className="text-left p-3 px-5">Catégorie de Sujet</th>
+                            <th className="text-left p-3 px-5">Diplôme</th>
+                            <th className="text-left p-3 px-5">Frais de Candidature</th>
                             <th></th>
                         </tr>
                         {
@@ -163,9 +163,9 @@ const ManageScholarships = () => {
             { editModalOpen && (
                 <div className="fixed inset-0 z-50 overflow-auto bg-gray-900 bg-opacity-50 lg:flex items-center justify-center p-4">
                     <div className="bg-background-50 w-full max-w-md p-6 rounded-lg">
-                        <h2 className="text-xl font-semibold mb-4">Edit Scholarship</h2>
+                        <h2 className="text-xl font-semibold mb-4">Modifier la Bourse</h2>
                         <ScholarshipFormInput
-                            label="University Name"
+                            label="Nom de l'Université"
                             value={ editedScholarship.university_name }
                             onChange={ (e) =>
                                 setEditedScholarship({
@@ -175,7 +175,7 @@ const ManageScholarships = () => {
                             }
                         />
                         <ScholarshipFormInput
-                            label="University Location - Country"
+                            label="Localisation Université - Pays"
                             value={ editedScholarship?.university_location?.country || "" }
                             onChange={ (e) =>
                                 setEditedScholarship({
@@ -188,7 +188,7 @@ const ManageScholarships = () => {
                             }
                         />
                         <ScholarshipFormOptionInput
-                            label="Scholarship Category"
+                            label="Catégorie de Bourse"
                             value={ editedScholarship.scholarship_category }
                             options={ scholarshipCategories }
                             onChange={ (e) =>
@@ -199,7 +199,7 @@ const ManageScholarships = () => {
                             }
                         />
                         <ScholarshipFormInput
-                            label="Application Deadline"
+                            label="Date Limite de Candidature"
                             type="date"
                             value={ editedScholarship.application_deadline }
                             onChange={ (e) =>
@@ -210,7 +210,7 @@ const ManageScholarships = () => {
                             }
                         />
                         <ScholarshipFormOptionInput
-                            label="Subject Category"
+                            label="Catégorie de Sujet"
                             value={ editedScholarship.subject_name }
                             options={ subjectCategories }
                             onChange={ (e) =>
@@ -221,7 +221,7 @@ const ManageScholarships = () => {
                             }
                         />
                         <ScholarshipFormInput
-                            label="Stipend"
+                            label="Allocation"
                             value={ editedScholarship.stipend }
                             type="number"
                             onChange={ (e) =>
@@ -232,7 +232,7 @@ const ManageScholarships = () => {
                             }
                         />
                         <ScholarshipFormInput
-                            label="Service Charge"
+                            label="Frais de Service"
                             value={ editedScholarship.service_charge }
                             type="number"
                             onChange={ (e) =>
@@ -243,7 +243,7 @@ const ManageScholarships = () => {
                             }
                         />
                         <ScholarshipFormInput
-                            label="Application Fees"
+                            label="Frais de Candidature"
                             value={ editedScholarship.application_fees }
                             type="number"
                             onChange={ (e) =>
@@ -254,7 +254,7 @@ const ManageScholarships = () => {
                             }
                         />
                         <ScholarshipFormOptionInput
-                            label="Degree"
+                            label="Diplôme"
                             value={ editedScholarship.degree_name }
                             options={ degrees }
                             onChange={ (e) =>
@@ -265,7 +265,7 @@ const ManageScholarships = () => {
                             }
                         />
                         <ScholarshipFormInput
-                            label="University Logo URL"
+                            label="URL du Logo Universitaire"
                             value={ editedScholarship.university_logo || "" }
                             placeholder="https://example.com/logo.png"
                             onChange={ (e) =>
@@ -276,7 +276,7 @@ const ManageScholarships = () => {
                             }
                         />
                         <ScholarshipFormInput
-                            label="Official Website Link"
+                            label="Lien du Site Web Officiel"
                             value={ editedScholarship.official_link || "" }
                             placeholder="https://example.com"
                             onChange={ (e) =>
@@ -293,14 +293,14 @@ const ManageScholarships = () => {
                                 className="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded mr-2"
                                 onClick={ handleUpdateScholarship }
                             >
-                                Save Changes
+                                Enregistrer les Modifications
                             </button>
                             <button
                                 type="button"
                                 className="bg-gray-300 hover:bg-gray-400 text-gray-900 px-4 py-2 rounded"
                                 onClick={ closeEditModal }
                             >
-                                Cancel
+                                Annuler
                             </button>
                         </div>
                     </div>

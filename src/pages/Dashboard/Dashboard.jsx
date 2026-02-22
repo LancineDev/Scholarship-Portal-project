@@ -51,13 +51,13 @@ const Dashboard = () => {
     return (
         <>
             <Helmet>
-                <title>Scholarship Portal | Dashboard</title>
+                <title>10Bourse | Tableau de Bord</title>
             </Helmet>
 
             <div className="lg:flex flex-col lg:flex-row lg:min-h-screen w-full">
                 <div className="flex flex-col w-full lg:w-64 bg-accent-600 flex-shrink-0">
                     <div className="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between">
-                        <p className="text-lg font-semibold tracking-widest text-text-100 uppercase rounded-lg focus:outline-none focus:shadow-outline">Dashboard</p>
+                        <p className="text-lg font-semibold tracking-widest text-text-100 uppercase rounded-lg focus:outline-none focus:shadow-outline">Tableau de Bord</p>
                         <button className="rounded-lg lg:hidden focus:outline-none focus:shadow-outline" onClick={ () => setOpen(!open) }>
                             <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6 text-text-100">
                                 { open ? (

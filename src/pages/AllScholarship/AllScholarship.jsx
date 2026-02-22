@@ -27,12 +27,12 @@ const AllScholarship = () => {
                 <section className="container my-16 mx-auto px-2 md:px-4">
                     <Title title="All Scholarship" />
                     <div className="text-center py-12">
-                        <p className="text-gray-600 mb-4">Loading scholarships...</p>
+                        <p className="text-gray-600 mb-4">Chargement des bourses...</p>
                         <button 
                             onClick={() => refetch()} 
                             className="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded"
                         >
-                            Retry
+                            Réessayer
                         </button>
                     </div>
                 </section>
@@ -59,15 +59,15 @@ const AllScholarship = () => {
     return (
         <>
             <Helmet>
-                <title>Scholarship Portal | All Scholarship</title>
+                <title>10Bourse | Toutes les Bourses</title>
             </Helmet>
 
             <section className="container my-16 mx-auto px-2 md:px-4">
-                <Title title="All Scholarship" />
+                <Title title="Toutes les Bourses" />
 
                 {/* Search */}
                 <form onSubmit={ handleSubmit } className="mb-10 mx-auto max-w-xl py-2 px-6 rounded bg-primary-100 focus-within:border flex focus-within:border-primary-300">
-                    <input type="text" placeholder="Search by Scholarship, University, Degree" className="bg-transparent w-full focus:outline-none pr-4 font-semibold border-0 focus:ring-0 px-0 py-0" name="topic" value={ searchTerm } onChange={ handleSearchChange } /><button type="submit" className="flex flex-row items-center justify-center min-w-[130px] px-4 rounded font-medium tracking-wide border disabled:cursor-not-allowed disabled:opacity-50 transition ease-in-out duration-150 text-base bg-primary-500 border-transparent py-1.5 h-[38px] -mr-3 text-black">Search</button>
+                    <input type="text" placeholder="Rechercher par Bourse, Université, Diplôme" className="bg-transparent w-full focus:outline-none pr-4 font-semibold border-0 focus:ring-0 px-0 py-0" name="topic" value={ searchTerm } onChange={ handleSearchChange } /><button type="submit" className="flex flex-row items-center justify-center min-w-[130px] px-4 rounded font-medium tracking-wide border disabled:cursor-not-allowed disabled:opacity-50 transition ease-in-out duration-150 text-base bg-primary-500 border-transparent py-1.5 h-[38px] -mr-3 text-black">Chercher</button>
                 </form>
 
                 {/* Scholarship cards */ }

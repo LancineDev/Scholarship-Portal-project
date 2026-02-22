@@ -16,6 +16,7 @@ const AddScholarship = () => {
         scholarshipName: "",
         universityName: "",
         universityLogo: "",
+        universityLogoUrl: "",
         universityCountry: "",
         universityCity: "",
         universityRank: "",
@@ -26,7 +27,8 @@ const AddScholarship = () => {
         applicationFees: "",
         serviceCharge: "",
         applicationDeadline: "",
-        scholarshipDescription: ""
+        scholarshipDescription: "",
+        officialLink: ""
     };
 
     const [formData, setFormData] = useState(initialState);
@@ -54,75 +56,111 @@ const AddScholarship = () => {
         e.preventDefault();
         setLoading(true);
 
-        const {
-            universityName,
-            universityLogo,
-            universityCountry,
-            universityCity,
-            universityRank,
-            subjectCategory,
-            scholarshipCategory,
-            scholarshipDescription,
-            degree,
-            tuitionFees,
-            applicationFees,
-            serviceCharge,
-            applicationDeadline,
-        } = formData;
+        try {
+            const {
+                universityName,
+                universityLogo,
+                universityLogoUrl,
+                universityCountry,
+                universityCity,
+                universityRank,
+                subjectCategory,
+                scholarshipCategory,
+                scholarshipDescription,
+                degree,
+                tuitionFees,
+                applicationFees,
+                serviceCharge,
+                applicationDeadline,
+                officialLink,
+            } = formData;
 
-        const todayDate = new Date().toISOString().split('T')[0];
+            let logoUrl = universityLogoUrl || "/assets/logos/placeholder.png";
 
-        const scholarshipData = {
-            university_name: universityName,
-            university_logo: universityLogo,
-            scholarship_category: scholarshipCategory,
-            university_location: {
-                country: universityCountry,
-                city: universityCity
-            },
-            application_deadline: applicationDeadline,
-            subject_name: subjectCategory,
-            scholarship_description: scholarshipDescription,
-            post_date: todayDate,
-            stipend: parseInt(tuitionFees),
-            university_rank: universityRank,
-            service_charge: parseInt(serviceCharge),
-            application_fees: parseInt(applicationFees),
-            degree_name: degree,
-            posted_user_email: user.email
-        };
+            // If file is selected, upload it
+            if (universityLogo) {
+                try {
+                    const formDataFile = new FormData();
+                    formDataFile.append('image', universityLogo);
+                    const res = await axiosPublic.post(image_hosting_api, formDataFile, {
+                        timeout: 15000
+                    });
+                    if (res.data.data.display_url) {
+                        logoUrl = res.data.data.display_url;
+                    }
+                } catch (imgError) {
+                    console.error("Image upload error:", imgError);
+                    Swal.fire({
+                        title: "Warning",
+                        text: "Image upload failed, using URL instead",
+                        icon: "warning",
+                        background: "var(--accent-100)",
+                        color: "var(--text-primary)",
+                    });
+                }
+            }
 
-        if (universityLogo) {
-            const formData = new FormData();
-            formData.append('image', universityLogo);
-            const res = await axiosPublic.post(image_hosting_api, formData);
-            scholarshipData.university_logo = res.data.data.display_url;
-        }
+            const todayDate = new Date().toISOString().split('T')[0];
 
-        const response = await axiosPublic.post("/scholarships", scholarshipData);
+            const scholarshipData = {
+                university_name: universityName,
+                university_logo: logoUrl,
+                scholarship_category: scholarshipCategory,
+                university_location: {
+                    country: universityCountry,
+                    city: universityCity
+                },
+                application_deadline: applicationDeadline,
+                subject_name: subjectCategory,
+                scholarship_description: scholarshipDescription,
+                post_date: todayDate,
+                stipend: parseInt(tuitionFees) || 0,
+                university_rank: universityRank,
+                service_charge: parseInt(serviceCharge) || 0,
+                application_fees: parseInt(applicationFees) || 0,
+                degree_name: degree,
+                posted_user_email: user.email,
+                official_link: officialLink || ""
+            };
 
-        if (response.status === 200) {
-            setFormData(initialState);
-            Swal.fire({
-                title: "Success",
-                text: "Scholarship added successfully!",
-                icon: "success",
-                background: "var(--accent-100)",
-                color: "var(--text-primary)",
-                iconColor: "var(--primary-500)",
-                confirmButtonColor: "var(--primary-500)",
+            const response = await axiosPublic.post("/scholarships", scholarshipData, {
+                timeout: 15000
             });
-        } else {
+
+            if (response.status === 200) {
+                setFormData(initialState);
+                Swal.fire({
+                    title: "Success",
+                    text: "Scholarship added successfully!",
+                    icon: "success",
+                    background: "var(--accent-100)",
+                    color: "var(--text-primary)",
+                    iconColor: "var(--primary-500)",
+                    confirmButtonColor: "var(--primary-500)",
+                });
+            } else {
+                Swal.fire({
+                    title: "Error",
+                    text: "Failed to add scholarship",
+                    icon: "error",
+                    background: "var(--accent-100)",
+                    color: "var(--text-primary)",
+                    confirmButtonColor: "var(--primary-500)",
+                });
+            }
+        } catch (error) {
+            console.error("Submit error:", error);
             Swal.fire({
                 title: "Error",
-                text: "Failed to add scholarship",
+                text: error.message || "An error occurred while adding the scholarship",
                 icon: "error",
                 background: "var(--accent-100)",
                 color: "var(--text-primary)",
                 confirmButtonColor: "var(--primary-500)",
             });
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     return (
@@ -153,15 +191,22 @@ const AddScholarship = () => {
                     required
                 />
                 <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-500">University Logo</label>
+                    <label className="block text-sm font-medium text-gray-500">University Logo (File)</label>
                     <input
                         type="file"
                         accept="image/*"
                         onChange={ handleImageUpload }
                         className="mt-1 block w-full border border-gray-500 rounded shadow focus:border-primary-500 focus:ring focus:ring-primary-500 p-1.5 bg-accent-100 text-sm"
-                        required
                     />
+                    <p className="text-xs text-gray-400 mt-1">Optional - if not provided, use URL below</p>
                 </div>
+                <ScholarshipFormInput
+                    label="University Logo URL"
+                    value={ formData.universityLogoUrl }
+                    onChange={ handleChange }
+                    name="universityLogoUrl"
+                    placeholder="https://example.com/logo.png"
+                />
                 <ScholarshipFormInput
                     label="University Country"
                     value={ formData.universityCountry }
@@ -187,9 +232,9 @@ const AddScholarship = () => {
                     label="Subject Category"
                     value={ formData.subjectCategory }
                     onChange={ handleChange }
-                    options={ ["Agriculture", "Engineering", "Doctor"] }
                     name="subjectCategory"
                     required
+                    asInput={true}
                 />
                 <ScholarshipFormOptionInput
                     label="Scholarship Category"
@@ -245,6 +290,13 @@ const AddScholarship = () => {
                     onChange={ handleChange }
                     name="scholarshipDescription"
                     required
+                />
+                <ScholarshipFormInput
+                    label="Official Website Link"
+                    value={ formData.officialLink }
+                    onChange={ handleChange }
+                    name="officialLink"
+                    placeholder="https://example.com/scholarship"
                 />
 
                 <button type="submit" className="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded">

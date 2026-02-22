@@ -264,6 +264,28 @@ const ManageScholarships = () => {
                                 })
                             }
                         />
+                        <ScholarshipFormInput
+                            label="University Logo URL"
+                            value={ editedScholarship.university_logo || "" }
+                            placeholder="https://example.com/logo.png"
+                            onChange={ (e) =>
+                                setEditedScholarship({
+                                    ...editedScholarship,
+                                    university_logo: e.target.value,
+                                })
+                            }
+                        />
+                        <ScholarshipFormInput
+                            label="Official Website Link"
+                            value={ editedScholarship.official_link || "" }
+                            placeholder="https://example.com"
+                            onChange={ (e) =>
+                                setEditedScholarship({
+                                    ...editedScholarship,
+                                    official_link: e.target.value,
+                                })
+                            }
+                        />
 
                         <div className="flex justify-end">
                             <button

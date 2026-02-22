@@ -28,8 +28,8 @@ const NavBar = () => {
                 <div className="flex flex-row items-center justify-between p-4 flex-grow">
                     {/* Logo and Title */ }
                     <Link to="/" className="text-lg font-medium tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline flex items-center gap-2">
-                        <img className="w-12 lg:w-16" src="/logo.png" alt="Logo" />
-                        <p className="hidden lg:block text-primary-800"><span className="font-extrabold">Scholarship</span> Portal</p></Link>
+                        <img className="h-16 lg:h-20 w-auto" src="/logo.png" alt="Logo" />
+                        <p className="hidden lg:block text-primary-800"><span className="font-extrabold">10</span>Bourse</p></Link>
 
                     <div className="flex gap-3 lg:gap-6">
                         {/* Theme Toggle */ }
@@ -40,7 +40,7 @@ const NavBar = () => {
                             <img alt={ user?.displayName } className="w-8 h-8 rounded-full ring-2 ring-offset-2 ring-primary-500" src={ user?.photoURL || "https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png" } />
 
                             {/* Username tooltip */ }
-                            <div className="absolute top-0 flex flex-col items-center hidden mt-8 group-hover:flex">
+                            <div className="absolute top-0 flex flex-col items-center invisible group-hover:visible mt-8">
                                 <div className="w-3 h-3 -mb-2 rotate-45 bg-black"></div>
                                 <span className="relative z-10 p-2 text-xs leading-none text-white whitespace-nowrap bg-primary-300 shadow-lg">{ user?.displayName }</span>
                             </div>

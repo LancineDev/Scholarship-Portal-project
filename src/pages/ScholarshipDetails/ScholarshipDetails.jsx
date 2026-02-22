@@ -46,7 +46,7 @@ const ScholarshipDetails = () => {
         return (
                 <>
             <Helmet>
-                <title>{scholarship.university_name} | Scholarship Details</title>
+                <title>{scholarship?.university_name || 'Scholarship Details'} | Scholarship Details</title>
                 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
             </Helmet>
 

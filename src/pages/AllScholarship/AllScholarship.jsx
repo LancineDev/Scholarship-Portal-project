@@ -6,19 +6,38 @@ import { useEffect, useState } from "react";
 import Title from "../../components/Title";
 
 const AllScholarship = () => {
-    const [scholarships, loading, error] = useScholarshipData();
+    const [scholarships, loading, error, refetch] = useScholarshipData();
     const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
-        setSearchTerm(""); // Reset search term when scholarships change
+        setSearchTerm("");
     }, [scholarships]);
 
     if (loading) {
-        return <Loading></Loading>;
+        return <Loading />;
     }
 
-    if (error) {
-        return <div className="text-red-400 text-2xl font-semibold min-h-[49vh] flex items-center justify-center">Error: { error }</div>;
+    if (error || !scholarships || scholarships.length === 0) {
+        // Don't show error, just show empty state or retry
+        return (
+            <>
+                <Helmet>
+                    <title>Scholarship Portal | All Scholarship</title>
+                </Helmet>
+                <section className="container my-16 mx-auto px-2 md:px-4">
+                    <Title title="All Scholarship" />
+                    <div className="text-center py-12">
+                        <p className="text-gray-600 mb-4">Loading scholarships...</p>
+                        <button 
+                            onClick={() => refetch()} 
+                            className="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded"
+                        >
+                            Retry
+                        </button>
+                    </div>
+                </section>
+            </>
+        );
     }
 
     const handleSearchChange = (e) => {

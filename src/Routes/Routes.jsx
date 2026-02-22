@@ -52,6 +52,10 @@ export const router = createBrowserRouter([
                 element: <AssistanceService />,
             },
             {
+                path: "assistance-service",
+                element: <AssistanceService />,
+            },
+            {
                 path: "payment/:id",
                 element: <Payment />,
             },

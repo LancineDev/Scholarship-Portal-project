@@ -2,11 +2,44 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const ScholarshipCard = ({ scholarship }) => {
-    const { _id, university_name, university_logo, scholarship_category, university_location, application_deadline, subject_name, application_fees } = scholarship;
+    if (!scholarship) return null;
+    
+    const { 
+        _id, 
+        university_name = "Unknown University", 
+        university_logo = "/logo.png", 
+        scholarship_category = "Unknown", 
+        university_location = {}, 
+        application_deadline = "N/A", 
+        subject_name = "General", 
+        application_fees = 0 
+    } = scholarship;
+
+    const location = university_location?.country || "Unknown";
+
+    // Determine if scholarship is open or coming soon
+    // Open: deadline within next 90 days (by May 23, 2026)
+    // Coming Soon: deadline after May 23, 2026
+    const isOpen = () => {
+        if (application_deadline === "N/A") return true;
+        const deadline = new Date(application_deadline);
+        const cutoffDate = new Date("2026-05-23");
+        return deadline <= cutoffDate;
+    };
 
     return (
-        <div className="w-full max-w-4xl flex flex-row gap-1 sm:items-center justify-between px-5 py-4 rounded border-b-4 border-accent-400 bg-gradient-to-tl from-accent-50 to-accent-200">
+        <div className="w-full max-w-4xl flex flex-row gap-1 sm:items-center justify-between px-5 py-4 rounded border-b-4 border-accent-400 bg-gradient-to-tl from-accent-50 to-accent-200 relative">
             <div className="group-hover:animate-spin-slow invisible absolute -top-40 -bottom-40 left-10 right-10 bg-gradient-to-r from-transparent via-white/90 to-transparent group-hover:visible"></div>
+            
+            {/* Flag indicator */}
+            <div className="absolute top-3 right-3">
+                {isOpen() ? (
+                    <span className="text-lg" title="Bourse Ouverte">🟢 OUVERT</span>
+                ) : (
+                    <span className="text-lg" title="À Venir">🟡 À VENIR</span>
+                )}
+            </div>
+
             <div>
                 {/* University name */ }
                 <span className="text-primary-700 text-sm">{ university_name }</span>
@@ -51,7 +84,7 @@ const ScholarshipCard = ({ scholarship }) => {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        { university_location.country }
+                        { location }
                     </span>
                 </div>
 
@@ -68,7 +101,12 @@ const ScholarshipCard = ({ scholarship }) => {
 
             {/* University logo */ }
             <div className="h-full">
-                <img className="w-12 h-12 lg:w-16 lg:h-16 rounded-full object-center object-cover" src={ university_logo } alt={ `${university_name} logo` } />
+                <img 
+                    className="w-12 h-12 lg:w-16 lg:h-16 rounded-full object-center object-cover bg-gray-100" 
+                    src={ university_logo } 
+                    alt={ `${university_name} logo` }
+                    onError={(e) => { e.target.src = "/logo.png"; }}
+                />
             </div>
         </div>
     );

@@ -14,25 +14,25 @@ const ContactUs = () => {
                 <form className="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
                     {/* Name */ }
                     <div className="mb-3 w-full">
-                        <label className="block font-medium mb-[2px] text-primary-800" htmlFor="name">Name</label>
-                        <input type="text" className="p-3 w-full outline-none rounded bg-accent-100" id="name" placeholder="Enter your first and last name" />
+                        <label className="block font-medium mb-[2px] text-primary-800" htmlFor="name">Nom</label>
+                        <input type="text" className="p-3 w-full outline-none rounded bg-accent-100" id="name" placeholder="Entrez votre prénom et votre nom" />
                     </div>
 
                     {/* Email */ }
                     <div className="mb-3 w-full">
                         <label className="block font-medium mb-[2px] text-primary-800" htmlFor="email">
-                            Email</label>
-                        <input type="email" className="p-3 w-full outline-none rounded bg-accent-100" id="email" placeholder="Enter your email address" />
+                            E-mail</label>
+                        <input type="email" className="p-3 w-full outline-none rounded bg-accent-100" id="email" placeholder="Entrez votre adresse e-mail" />
                     </div>
 
                     {/* Message */ }
                     <div className="mb-3 w-full">
                         <label className="block font-medium mb-[2px] text-primary-800" htmlFor="text">
                             Message</label>
-                        <textarea className="p-3 bg-accent-100 rounded w-full outline-none" name="message" id="message" placeholder="Enter your short message"></textarea>
+                        <textarea className="p-3 bg-accent-100 rounded w-full outline-none" name="message" id="message" placeholder="Entrez votre court message"></textarea>
                     </div>
 
-                    <PrimaryButton className="mb-6">Send</PrimaryButton>
+                    <PrimaryButton className="mb-6">Envoyer</PrimaryButton>
                 </form>
 
                 <div className="w-full shrink-0 grow-0 basis-auto lg:w-7/12">
@@ -50,7 +50,7 @@ const ContactUs = () => {
                                     </div>
                                 </div>
                                 <div className="ml-6 grow">
-                                    <p className="mb-2 font-bold">Technical support</p>
+                                    <p className="mb-2 font-bold">Support Technique</p>
                                     <p className="text-neutral-500">klancine011@mail.com</p>
                                     <p className="text-neutral-500">0712129409/0710758249</p>
                                 </div>
@@ -70,7 +70,7 @@ const ContactUs = () => {
                                     </div>
                                 </div>
                                 <div className="ml-6 grow">
-                                    <p className="mb-2 font-bold">Scholarship questions</p>
+                                    <p className="mb-2 font-bold">Questions sur les Bourses</p>
                                     <p className="text-neutral-500">klancine011@mail.com</p>
                                     <p className="text-neutral-500">0712129409/0710758249</p>
                                 </div>
@@ -90,7 +90,7 @@ const ContactUs = () => {
                                     </div>
                                 </div>
                                 <div className="ml-6 grow">
-                                    <p className="mb-2 font-bold">Press</p>
+                                    <p className="mb-2 font-bold">Presse</p>
                                     <p className="text-neutral-500">klancine011@mail.com</p>
                                     <p className="text-neutral-500">0712129409/0710758249</p>
                                 </div>
@@ -110,7 +110,7 @@ const ContactUs = () => {
                                     </div>
                                 </div>
                                 <div className="ml-6 grow">
-                                    <p className="mb-2 font-bold">Bug report</p>
+                                    <p className="mb-2 font-bold">Signaler un Problème</p>
                                     <p className="text-neutral-500">klancine011@mail.com</p>
                                     <p className="text-neutral-500">0712129409/0710758249</p>
                                 </div>

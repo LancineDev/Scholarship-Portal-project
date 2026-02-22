@@ -22,7 +22,7 @@ const AllScholarship = () => {
         return (
             <>
                 <Helmet>
-                    <title>Scholarship Portal | All Scholarship</title>
+                    <title>10bourse | Toutes les Bourses</title>
                 </Helmet>
                 <section className="container my-16 mx-auto px-2 md:px-4">
                     <Title title="All Scholarship" />

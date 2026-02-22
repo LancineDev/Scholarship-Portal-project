@@ -444,7 +444,7 @@ const ScholarshipDetails = () => {
                             </Link>
 
                             <div className="sd-disclaimer">
-                                Scholarship Portal is not affiliated with the scholarship provider. We offer independent information and optional application assistance.
+                                10bourse n'est pas affilié au fournisseur de bourses. Nous offrons des informations indépendantes et une assistance optionnelle pour les demandes.
                             </div>
                         </div>
                     </div>

@@ -82,7 +82,7 @@ const SignUp = () => {
   return (
     <>
       <Helmet>
-        <title>Scholarship Portal | Sign Up</title>
+        <title>10bourse | Inscription</title>
       </Helmet>
 
       <section className="bg-accent-200">

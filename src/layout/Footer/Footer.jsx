@@ -8,13 +8,13 @@ const Footer = () => {
 
                     {/* Logo, Title and About */ }
                     <div className="sm:col-span-2">
-                        <Link href="/" aria-label="Go home" title="Scholapship Portal" className="inline-flex items-center">
+                        <Link href="/" aria-label="Go home" title="10bourse" className="inline-flex items-center">
                             <img className="w-12 lg:w-16" src="/logo.png" alt="Logo" />
-                            <p className="ml-2 text-xl tracking-wide text-primary-800 uppercase font-medium"><span className="font-extrabold">Scholarship</span> Portal</p>
+                            <p className="ml-2 text-xl tracking-wide text-primary-800 uppercase font-medium"><span className="font-extrabold">10</span>Bourse</p>
                         </Link>
                         <div className="mt-6 lg:max-w-sm text-sm text-gray-500">
-                            <p>Scholarship Portal is the most powerful next-gen scholarship platform for Côte d'Ivoire.</p>
-                            <p className="mt-4">Providing information about international financial aid &amp; scholarships since 2024.</p>
+                            <p>10bourse est la plateforme de bourses de nouvelle génération la plus puissante de Côte d'Ivoire.</p>
+                            <p className="mt-4">Fournir des informations sur les aides financières internationales et les bourses depuis 2024.</p>
                         </div>
                     </div>
 
@@ -23,26 +23,26 @@ const Footer = () => {
                         <h3 className="text-base font-bold tracking-wide">Contacts</h3>
                         {/* Phone */ }
                         <div className="flex">
-                            <p className="mr-1 text-gray-500">Phone:</p>
+                            <p className="mr-1 text-gray-500">Téléphone :</p>
                             <a href="tel:01234567890" aria-label="Our phone" title="Our phone" className="transition-colors duration-300 hover:text-primary-700">0712129409/0710758249</a>
                         </div>
 
                         {/* Email */ }
                         <div className="flex">
-                            <p className="mr-1 text-gray-500">Email:</p>
+                            <p className="mr-1 text-gray-500">E-mail :</p>
                             <a href="mailto:info@lorem.mail" aria-label="Our email" title="Our email" className="transition-colors duration-300 hover:text-primary-700">klancine011@mail.com</a>
                         </div>
 
                         {/* Address */ }
                         <div className="flex">
-                            <p className="mr-1 text-gray-500">Address:</p>
+                            <p className="mr-1 text-gray-500">Adresse :</p>
                             <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" aria-label="Our address" title="Our address" className="transition-colors duration-300 hover:text-primary-700">Abidjan , Côte d'Ivoire</a>
                         </div>
                     </div>
 
                     {/* Social */ }
                     <div className="text-gray-500 text-sm">
-                        <h3 className="text-base text-text-950 font-bold tracking-wide">Social</h3>
+                        <h3 className="text-base text-text-950 font-bold tracking-wide">Réseaux Sociaux</h3>
                         <div className="flex items-center mt-1 space-x-3">
                             {/* Twitter */ }
                             <a href="/" className="transition-colors duration-300 hover:text-primary-400">
@@ -72,17 +72,17 @@ const Footer = () => {
                                 </svg>
                             </a>
                         </div>
-                        <p className="mt-4">Thank you for visiting ScholarshipPortalBD.com</p>
+                        <p className="mt-4">Merci d'avoir visité 10bourse.com</p>
                     </div>
                 </div>
 
                 {/* Copyright and Links */ }
                 <div className="flex flex-col-reverse justify-between pt-5 pb-10 border-t border-accent-200 lg:flex-row text-gray-600 text-sm">
-                    <p>© Copyright 2024 Scholrship Portal Inc. All rights reserved.</p>
+                    <p>© Droits d'auteur 2024 10bourse Inc. Tous droits réservés.</p>
                     <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
                         <li><a href="/" className="transition-colors duration-300 hover:underline hover:text-primary-700">FAQ</a></li>
-                        <li><a href="/" className="transition-colors duration-300 hover:underline hover:text-primary-700">Privacy Policy</a></li>
-                        <li><a href="/" className="transition-colors duration-300 hover:underline hover:text-primary-700">Terms &amp; Conditions</a></li>
+                        <li><a href="/" className="transition-colors duration-300 hover:underline hover:text-primary-700">Politique de Confidentialité</a></li>
+                        <li><a href="/" className="transition-colors duration-300 hover:underline hover:text-primary-700">Conditions Générales d'Utilisation</a></li>
                     </ul>
                 </div>
             </div>

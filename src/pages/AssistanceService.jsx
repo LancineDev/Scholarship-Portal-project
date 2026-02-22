@@ -5,12 +5,12 @@ import { Helmet } from "react-helmet-async";
 const AssistanceService = () => {
   // Ton lien WhatsApp avec ton numéro et le message pré-rempli
   const whatsappLink =
-    "https://wa.me/2250712129409?text=Bonjour%20Scholarship%20Portal,%0A%0AJe%20suis%20int%C3%A9ress%C3%A9(e)%20par%20votre%20service%20d%27assistance%20professionnelle%20(9%20995%20F%20CFA).%0A%0AVoici%20mes%20informations%20:%0A- Nom%20complet%20:%0A- Pays%20:%0A- Nom%20de%20la%20bourse%20:%0A- Date%20limite%20:%0A%0AMerci%20de%20me%20guider%20pour%20la%20suite.";
+    "https://wa.me/2250712129409?text=Bonjour%2010bourse,%0A%0AJe%20suis%20int%C3%A9ress%C3%A9(e)%20par%20votre%20service%20d%27assistance%20professionnelle%20(9%20995%20F%20CFA).%0A%0AVoici%20mes%20informations%20:%0A- Nom%20complet%20:%0A- Pays%20:%0A- Nom%20de%20la%20bourse%20:%0A- Date%20limite%20:%0A%0AMerci%20de%20me%20guider%20pour%20la%20suite.";
 
   return (
     <>
       <Helmet>
-        <title>Assistance Professionnelle | Scholarship Portal</title>
+        <title>Assistance Professionnelle | 10bourse</title>
       </Helmet>
 
       <div className="container mx-auto my-16 px-4 text-center">

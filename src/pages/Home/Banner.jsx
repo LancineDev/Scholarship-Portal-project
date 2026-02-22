@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 const Banner = () => {
     const carouselRef = useRef(null);
@@ -21,6 +21,27 @@ const Banner = () => {
         }
     };
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (carouselRef.current) {
+                const carousel = carouselRef.current;
+                // Check if we've reached the end
+                if (carousel.scrollLeft >= carousel.scrollWidth - carousel.offsetWidth - 10) {
+                    // Reset to the beginning
+                    carousel.scrollLeft = 0;
+                } else {
+                    // Scroll to next slide
+                    carousel.scrollBy({
+                        left: carousel.offsetWidth,
+                        behavior: "smooth"
+                    });
+                }
+            }
+        }, 5000); // Scroll every 5 seconds
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <section className="relative">
             <div ref={ carouselRef } className="carousel max-w-full flex overflow-hidden">
@@ -34,8 +55,8 @@ const Banner = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60"></div>
 
                     <div className="absolute top-1/3 md:top-1/2 left-10 max-w-5xl md:left-20">
-                        <div className="text-white lg:text-4xl tracking-widest text-xl py-4 mr-4">We make it simple and match you to scholarships you qualify for.</div>
-                        <h1 className="bg-white text-2xl lg:text-4xl font-extrabold tracking-widest mix-blend-screen px-4 lg:px-10 py-2 lg:py-5 text-black w-fit mt-4">Find Scholarships for University</h1>
+                        <div className="text-white lg:text-4xl tracking-widest text-xl py-4 mr-4">Nous le rendons simple et vous mettons en relation avec les bourses pour lesquelles vous êtes admissible.</div>
+                        <h1 className="bg-white text-2xl lg:text-4xl font-extrabold tracking-widest mix-blend-screen px-4 lg:px-10 py-2 lg:py-5 text-black w-fit mt-4">Trouvez des Bourses pour l'Université</h1>
                     </div>
                 </div>
 
@@ -49,8 +70,8 @@ const Banner = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60"></div>
 
                     <div className="absolute top-1/3 md:top-1/2 left-10 max-w-5xl md:left-20">
-                        <div className="text-white lg:text-4xl tracking-widest text-xl py-4 mr-4">Simplify and focus your application process with the one-stop platform for scholarships.</div>
-                        <h1 className="bg-white text-2xl lg:text-4xl font-extrabold tracking-widest mix-blend-screen px-4 lg:px-10 py-2 lg:py-5 text-black w-fit mt-4">The fastest path to earning scholarships</h1>
+                        <div className="text-white lg:text-4xl tracking-widest text-xl py-4 mr-4">Simplifiez et concentrez votre processus de candidature avec la plateforme tout-en-un pour les bourses.</div>
+                        <h1 className="bg-white text-2xl lg:text-4xl font-extrabold tracking-widest mix-blend-screen px-4 lg:px-10 py-2 lg:py-5 text-black w-fit mt-4">Le chemin le plus rapide pour obtenir des bourses</h1>
                     </div>
                 </div>
 
@@ -64,8 +85,8 @@ const Banner = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60"></div>
 
                     <div className="absolute top-1/3 md:top-1/2 left-10 max-w-5xl md:left-20">
-                        <div className="text-white lg:text-4xl tracking-widest text-xl py-4 mr-4">Secure your educational journey with strategic scholarship opportunities.</div>
-                        <h1 className="bg-white text-2xl lg:text-4xl font-extrabold tracking-widest mix-blend-screen px-4 lg:px-10 py-2 lg:py-5 text-black w-fit mt-4">Build your future for tomorrow</h1>
+                        <div className="text-white lg:text-4xl tracking-widest text-xl py-4 mr-4">Sécurisez votre parcours éducatif avec des opportunités de bourses stratégiques.</div>
+                        <h1 className="bg-white text-2xl lg:text-4xl font-extrabold tracking-widest mix-blend-screen px-4 lg:px-10 py-2 lg:py-5 text-black w-fit mt-4">Construisez votre avenir pour demain</h1>
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@ const Payment = () => {
     return (
         <div>
             <Helmet>
-                <title>Scholarship Portal | Payment</title>
+                <title>10bourse | Paiement</title>
             </Helmet>
 
             <div className="container my-16 mx-auto px-2 md:px-4">

@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SubscribeButton from "../../components/SubscribeButton";
 
 const ScholarshipDetails = () => {
     const [scholarship, setScholarship] = useState(null);
@@ -28,7 +29,7 @@ const ScholarshipDetails = () => {
     if (loading || !scholarship) return <Loading />;
     if (error) return (
         <div className="min-h-screen flex items-center justify-center">
-            <p className="text-red-500 text-sm">Error: {error}</p>
+            <p className="text-red-500 text-sm">Erreur&nbsp;: {error}</p>
         </div>
     );
 
@@ -119,9 +120,9 @@ const ScholarshipDetails = () => {
                     font-weight: 600;
                     letter-spacing: 0.1em;
                     text-transform: uppercase;
-                    color: #3b82f6;
-                    background: #eff6ff;
-                    border: 1px solid #bfdbfe;
+                    color: var(--primary-500);
+                    background: var(--primary-50);
+                    border: 1px solid var(--primary-200);
                     border-radius: 999px;
                     padding: 3px 12px;
                     margin-bottom: 14px;
@@ -179,9 +180,9 @@ const ScholarshipDetails = () => {
                     gap: 5px;
                     font-size: 12px;
                     font-weight: 600;
-                    color: #16a34a;
-                    background: #f0fdf4;
-                    border: 1px solid #bbf7d0;
+                    color: var(--secondary-500);
+                    background: var(--secondary-50);
+                    border: 1px solid var(--secondary-200);
                     border-radius: 999px;
                     padding: 4px 13px;
                 }
@@ -190,7 +191,7 @@ const ScholarshipDetails = () => {
                     width: 7px;
                     height: 7px;
                     border-radius: 50%;
-                    background: #22c55e;
+                    background: var(--secondary-500);
                     flex-shrink: 0;
                 }
 
@@ -232,7 +233,7 @@ const ScholarshipDetails = () => {
                     width: 3px;
                     height: 14px;
                     border-radius: 2px;
-                    background: #3b82f6;
+                    background: var(--primary-500);
                     flex-shrink: 0;
                 }
 
@@ -283,7 +284,7 @@ const ScholarshipDetails = () => {
                     display: block;
                     padding: 15px;
                     border-radius: 14px;
-                    background: #2563eb;
+                    background: var(--secondary-500);
                     color: #fff;
                     font-size: 14px;
                     font-weight: 600;
@@ -291,12 +292,12 @@ const ScholarshipDetails = () => {
                     text-decoration: none;
                     letter-spacing: 0.01em;
                     transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
-                    box-shadow: 0 4px 18px rgba(37,99,235,0.28);
+                    box-shadow: 0 4px 18px rgba(15,122,90,0.18);
                 }
                 .sd-btn-apply:hover {
-                    background: #1d4ed8;
+                    background: var(--secondary-600);
                     transform: translateY(-1px);
-                    box-shadow: 0 8px 28px rgba(37,99,235,0.35);
+                    box-shadow: 0 8px 28px rgba(15,122,90,0.22);
                 }
 
                 .sd-btn-assist {
@@ -304,23 +305,23 @@ const ScholarshipDetails = () => {
                     padding: 14px;
                     border-radius: 14px;
                     background: #fff;
-                    color: #7c3aed;
+                    color: var(--primary-500);
                     font-size: 13.5px;
                     font-weight: 600;
                     text-align: center;
                     text-decoration: none;
-                    border: 2px solid #7c3aed;
+                    border: 2px solid var(--primary-500);
                     transition: background 0.18s, transform 0.18s;
                 }
                 .sd-btn-assist:hover {
-                    background: #faf5ff;
+                    background: var(--primary-50);
                     transform: translateY(-1px);
                 }
                 .sd-btn-assist small {
                     display: block;
                     font-weight: 400;
                     font-size: 11.5px;
-                    color: #a78bfa;
+                    color: var(--primary-300);
                     margin-top: 2px;
                 }
 
@@ -345,7 +346,7 @@ const ScholarshipDetails = () => {
 
                     {/* Breadcrumb */}
                     <div className="sd-breadcrumb">
-                        Scholarships / <span>{scholarship.university_name}</span>
+                        Bourses / <span>{scholarship.university_name}</span>
                     </div>
 
                     {/* Hero */}
@@ -355,7 +356,7 @@ const ScholarshipDetails = () => {
                         </div>
 
                         <div className="sd-hero-text">
-                            <div className="sd-tag">Scholarship</div>
+                            <div className="sd-tag">Bourse</div>
                             <h1 className="sd-university">{scholarship.university_name}</h1>
                             <p className="sd-subject">{scholarship.subject_name}</p>
 
@@ -363,7 +364,7 @@ const ScholarshipDetails = () => {
                                 <div className="sd-meta-item">
                                     <div className="sd-meta-icon">📍</div>
                                     <div>
-                                        <span className="sd-meta-label">Location</span>
+                                        <span className="sd-meta-label">Localisation</span>
                                         <span className="sd-meta-val">
                                             {scholarship.university_location?.city}, {scholarship.university_location?.country}
                                         </span>
@@ -372,7 +373,7 @@ const ScholarshipDetails = () => {
                                 <div className="sd-meta-item">
                                     <div className="sd-meta-icon">📅</div>
                                     <div>
-                                        <span className="sd-meta-label">Deadline</span>
+                                        <span className="sd-meta-label">Date limite</span>
                                         <span className="sd-meta-val">{scholarship.application_deadline}</span>
                                     </div>
                                 </div>
@@ -387,8 +388,8 @@ const ScholarshipDetails = () => {
                     <div className="sd-grid">
 
                         {/* Description */}
-                        <div className="sd-desc-card">
-                            <div className="sd-card-title">Scholarship Description</div>
+                            <div className="sd-desc-card">
+                            <div className="sd-card-title">Description de la bourse</div>
                             <div
                                 className="sd-desc-body"
                                 dangerouslySetInnerHTML={{ __html: scholarship.scholarship_description }}
@@ -397,27 +398,27 @@ const ScholarshipDetails = () => {
 
                         {/* Sidebar */}
                         <div className="sd-sidebar">
-                            <div className="sd-side-card">
-                                <div className="sd-card-title">Details</div>
+                                <div className="sd-side-card">
+                                <div className="sd-card-title">Détails</div>
                                 <div className="sd-side-body">
                                     <div className="sd-detail-row">
-                                        <span className="sd-dl">Funding</span>
+                                        <span className="sd-dl">Financement</span>
                                         <span className="sd-dv">{scholarship.scholarship_category}</span>
                                     </div>
                                     <div className="sd-detail-row">
-                                        <span className="sd-dl">Deadline</span>
+                                        <span className="sd-dl">Date limite</span>
                                         <span className="sd-dv">{scholarship.application_deadline}</span>
                                     </div>
                                     <div className="sd-detail-row">
-                                        <span className="sd-dl">City</span>
+                                        <span className="sd-dl">Ville</span>
                                         <span className="sd-dv">{scholarship.university_location?.city}</span>
                                     </div>
                                     <div className="sd-detail-row">
-                                        <span className="sd-dl">Country</span>
+                                        <span className="sd-dl">Pays</span>
                                         <span className="sd-dv">{scholarship.university_location?.country}</span>
                                     </div>
                                     <div className="sd-detail-row">
-                                        <span className="sd-dl">Field of Study</span>
+                                        <span className="sd-dl">Domaine d'étude</span>
                                         <span className="sd-dv">{scholarship.subject_name}</span>
                                     </div>
                                 </div>
@@ -430,17 +431,24 @@ const ScholarshipDetails = () => {
                                                                 rel="noopener noreferrer"
                                                                 className="sd-btn-apply"
                                                             >
-                                                                Apply on Official Website ↗
+                                                                Postuler sur le site officiel ↗
                                                             </a>
                                                         ) : (
                                                             <button className="sd-btn-apply opacity-60 cursor-not-allowed" disabled>
-                                                                Official link unavailable
+                                                                Lien officiel indisponible
                                                             </button>
                                                         )}
 
+                                                        <div style={{ marginTop: '16px' }}>
+                                                            <SubscribeButton 
+                                                                scholarshipId={scholarship._id}
+                                                                scholarshipName={scholarship.university_name}
+                                                            />
+                                                        </div>
+
                             <Link to={`/assistance/${scholarship._id}`} className="sd-btn-assist">
-                                Need Assistance?
-                                <small>Professional Help · $50 USD</small>
+                                Besoin d'aide ?
+                                <small>Aide professionnelle · 50 $ USD</small>
                             </Link>
 
                             <div className="sd-disclaimer">

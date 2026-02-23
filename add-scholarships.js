@@ -84,6 +84,22 @@ const scholarships = [
     application_deadline: "2026-04-30",
     scholarship_description: "Partial funding (£10,000 minimum) for international students. Official Website: https://study-uk.britishcouncil.org/scholarships-funding/great-scholarships",
   },
+  {
+    scholarship_name: "Admission Master Data Science - University of Padua",
+    university_name: "Università degli Studi di Padova",
+    university_logo: "https://www.unipd.it/sites/unipd.it/files/logo_unipd_pieno.png",
+    university_country: "Italy",
+    university_city: "Padua",
+    university_rank: "Top 250 QS",
+    subject_category: "Mathematics, Computer Science, Big Data, Artificial Intelligence",
+    scholarship_category: "Self-funded",
+    degree: "Master's",
+    tuition_fees: 2739,
+    application_fees: 60,
+    service_charge: 208,
+    application_deadline: "2026-05-02",
+    scholarship_description: "Master's degree in Data Science (2 years, full-time) at the University of Padua. Annual tuition fees: €2,739. Application fee: €60. Service charge: €208. Official Website: https://www.unipd.it/en/data-science",
+  },
 ];
 
 const addScholarships = async () => {

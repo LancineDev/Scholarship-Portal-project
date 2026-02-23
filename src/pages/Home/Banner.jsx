@@ -54,9 +54,27 @@ const Banner = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60"></div>
 
-                    <div className="absolute top-1/3 md:top-1/2 left-10 max-w-5xl md:left-20">
-                        <div className="text-white lg:text-4xl tracking-widest text-xl py-4 mr-4">Nous le rendons simple et vous mettons en relation avec les bourses pour lesquelles vous êtes admissible.</div>
-                        <h1 className="bg-white text-2xl lg:text-4xl font-extrabold tracking-widest mix-blend-screen px-4 lg:px-10 py-2 lg:py-5 text-black w-fit mt-4">Trouvez des Bourses pour l'Université</h1>
+                    <div className="absolute inset-0 flex items-center">
+                        <div className="container mx-auto px-6 lg:px-20 text-white fade-in">
+                            <p className="max-w-2xl text-sm md:text-lg opacity-90 mb-3">Nous le rendons simple et vous mettons en relation avec les bourses pour lesquelles vous êtes admissible.</p>
+                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-4 text-primary-50">Trouvez des bourses pour l'université — rapidement</h1>
+
+                            <div className="mt-6 max-w-xl">
+                                <div className="flex gap-2 items-center bg-white/95 rounded-lg p-1 shadow-md">
+                                    <input
+                                        aria-label="Search scholarships"
+                                        placeholder="Université, matière ou pays (ex: France, ingénierie)"
+                                        className="flex-1 px-4 py-3 rounded-md bg-transparent outline-none text-black placeholder-gray-600"
+                                    />
+                                    <button className="btn-gradient rounded-md px-4 py-2 font-semibold ml-2" style={{ background: 'linear-gradient(90deg, var(--primary-500), var(--secondary-500))' }}>Rechercher</button>
+                                </div>
+
+                                <div className="mt-4 flex gap-3">
+                                    <a href="/all-scholarship" className="inline-block bg-white/95 text-black px-5 py-2 rounded-lg font-semibold shadow hover:shadow-lg">Voir les bourses</a>
+                                    <a href="/assistance-service" className="inline-block btn-gradient px-4 py-2 rounded-lg font-medium" style={{ background: 'linear-gradient(90deg, var(--primary-500), var(--secondary-500))' }}>Besoin d'aide ?</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -69,9 +87,16 @@ const Banner = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60"></div>
 
-                    <div className="absolute top-1/3 md:top-1/2 left-10 max-w-5xl md:left-20">
-                        <div className="text-white lg:text-4xl tracking-widest text-xl py-4 mr-4">Simplifiez et concentrez votre processus de candidature avec la plateforme tout-en-un pour les bourses.</div>
-                        <h1 className="bg-white text-2xl lg:text-4xl font-extrabold tracking-widest mix-blend-screen px-4 lg:px-10 py-2 lg:py-5 text-black w-fit mt-4">Le chemin le plus rapide pour obtenir des bourses</h1>
+                    <div className="absolute inset-0 flex items-center">
+                        <div className="container mx-auto px-6 lg:px-20 text-white fade-in">
+                            <p className="max-w-2xl text-sm md:text-lg opacity-90 mb-3">Simplifiez et concentrez votre processus de candidature avec la plateforme tout-en-un pour les bourses.</p>
+                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-4 text-primary-50">Le chemin le plus rapide pour obtenir des bourses</h1>
+
+                                <div className="mt-6 flex gap-3">
+                                <a href="/all-scholarship" className="inline-block bg-white/95 text-black px-5 py-2 rounded-lg font-semibold shadow hover:shadow-lg">Voir les bourses</a>
+                                <a href="/assistance-service" className="inline-block btn-gradient px-4 py-2 rounded-lg font-medium" style={{ background: 'linear-gradient(90deg, var(--primary-500), var(--secondary-500))' }}>Comment ça marche</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -84,9 +109,16 @@ const Banner = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60"></div>
 
-                    <div className="absolute top-1/3 md:top-1/2 left-10 max-w-5xl md:left-20">
-                        <div className="text-white lg:text-4xl tracking-widest text-xl py-4 mr-4">Sécurisez votre parcours éducatif avec des opportunités de bourses stratégiques.</div>
-                        <h1 className="bg-white text-2xl lg:text-4xl font-extrabold tracking-widest mix-blend-screen px-4 lg:px-10 py-2 lg:py-5 text-black w-fit mt-4">Construisez votre avenir pour demain</h1>
+                    <div className="absolute inset-0 flex items-center">
+                        <div className="container mx-auto px-6 lg:px-20 text-white fade-in">
+                            <p className="max-w-2xl text-sm md:text-lg opacity-90 mb-3">Sécurisez votre parcours éducatif avec des opportunités de bourses stratégiques.</p>
+                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-4 text-primary-50">Construisez votre avenir pour demain</h1>
+
+                                <div className="mt-6 flex gap-3">
+                                <a href="/signup" className="inline-block bg-white/95 text-black px-5 py-2 rounded-lg font-semibold shadow hover:shadow-lg">Inscrivez-vous</a>
+                                <a href="/all-scholarship" className="inline-block btn-gradient px-4 py-2 rounded-lg font-medium" style={{ background: 'linear-gradient(90deg, var(--primary-500), var(--secondary-500))' }}>Explorer</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -17,6 +17,7 @@ import ManageScholarships from "../pages/Dashboard/Admin/ManageScholarships/Mana
 import ManageApplications from "../pages/Dashboard/Admin/ManageApplications/ManageApplications";
 import ManageReviews from "../pages/Dashboard/Admin/ManageReviews/ManageReviews";
 import MyApplication from "../pages/Dashboard/MyApplication/MyApplication";
+import NotificationSettings from "../pages/Dashboard/NotificationSettings/NotificationSettings";
 
 export const router = createBrowserRouter([
     {
@@ -43,9 +44,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "scholarships/:id",
-                element: <PrivateRoute>
-                    <ScholarshipDetails />
-                </PrivateRoute>,
+                element: <ScholarshipDetails />,
             },
             {
                 path: "assistance/:id",
@@ -76,6 +75,10 @@ export const router = createBrowserRouter([
             {
                 path: "profile",
                 element: <MyProfile />,
+            },
+            {
+                path: "notification-settings",
+                element: <NotificationSettings />,
             },
             {
                 path: "manage-reviews",

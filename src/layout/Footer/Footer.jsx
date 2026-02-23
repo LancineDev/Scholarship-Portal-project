@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <footer>
+        <footer className="bg-primary-600 text-white">
             <div className="px-4 pt-24 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
                 <div className="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
 
@@ -10,9 +10,9 @@ const Footer = () => {
                     <div className="sm:col-span-2">
                         <Link href="/" aria-label="Go home" title="10bourse" className="inline-flex items-center">
                             <img className="w-12 lg:w-16" src="/logo.png" alt="Logo" />
-                            <p className="ml-2 text-xl tracking-wide text-primary-800 uppercase font-medium"><span className="font-extrabold">10</span>Bourse</p>
+                            <p className="ml-2 text-xl tracking-wide text-white uppercase font-medium"><span className="font-extrabold">10</span>Bourse</p>
                         </Link>
-                        <div className="mt-6 lg:max-w-sm text-sm text-gray-500">
+                        <div className="mt-6 lg:max-w-sm text-sm text-white/90">
                             <p>10bourse est la plateforme de bourses de nouvelle génération la plus puissante de Côte d'Ivoire.</p>
                             <p className="mt-4">Fournir des informations sur les aides financières internationales et les bourses depuis 2024.</p>
                         </div>
@@ -20,11 +20,11 @@ const Footer = () => {
 
                     {/* Contacts */ }
                     <div className="space-y-2 text-sm">
-                        <h3 className="text-base font-bold tracking-wide">Contacts</h3>
+                        <h3 className="text-base font-bold tracking-wide text-white">Contacts</h3>
                         {/* Phone */ }
                         <div className="flex">
-                            <p className="mr-1 text-gray-500">Téléphone :</p>
-                            <a href="tel:01234567890" aria-label="Our phone" title="Our phone" className="transition-colors duration-300 hover:text-primary-700">0712129409/0710758249</a>
+                            <p className="mr-1 text-white/90">Téléphone :</p>
+                            <a href="tel:01234567890" aria-label="Our phone" title="Our phone" className="transition-colors duration-300 hover:text-secondary-300">0712129409/0710758249</a>
                         </div>
 
                         {/* Email */ }
@@ -42,8 +42,8 @@ const Footer = () => {
 
                     {/* Social */ }
                     <div className="text-gray-500 text-sm">
-                        <h3 className="text-base text-text-950 font-bold tracking-wide">Réseaux Sociaux</h3>
-                        <div className="flex items-center mt-1 space-x-3">
+                        <h3 className="text-base text-white font-bold tracking-wide">Réseaux Sociaux</h3>
+                        <div className="flex items-center mt-1 space-x-3 text-white">
                             {/* Twitter */ }
                             <a href="/" className="transition-colors duration-300 hover:text-primary-400">
                                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
@@ -77,12 +77,12 @@ const Footer = () => {
                 </div>
 
                 {/* Copyright and Links */ }
-                <div className="flex flex-col-reverse justify-between pt-5 pb-10 border-t border-accent-200 lg:flex-row text-gray-600 text-sm">
+                <div className="flex flex-col-reverse justify-between pt-5 pb-10 border-t border-primary-700 lg:flex-row text-white text-sm">
                     <p>© Droits d'auteur 2024 10bourse Inc. Tous droits réservés.</p>
                     <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
-                        <li><a href="/" className="transition-colors duration-300 hover:underline hover:text-primary-700">FAQ</a></li>
-                        <li><a href="/" className="transition-colors duration-300 hover:underline hover:text-primary-700">Politique de Confidentialité</a></li>
-                        <li><a href="/" className="transition-colors duration-300 hover:underline hover:text-primary-700">Conditions Générales d'Utilisation</a></li>
+                        <li><a href="/" className="transition-colors duration-300 hover:underline hover:text-secondary-300">FAQ</a></li>
+                        <li><a href="/" className="transition-colors duration-300 hover:underline hover:text-secondary-300">Politique de Confidentialité</a></li>
+                        <li><a href="/" className="transition-colors duration-300 hover:underline hover:text-secondary-300">Conditions Générales d'Utilisation</a></li>
                     </ul>
                 </div>
             </div>

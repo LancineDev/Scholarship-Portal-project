@@ -18,7 +18,7 @@ const newScholarships = [
     application_fees: 0,
     service_charge: 0,
     application_deadline: "2026-02-28",
-    scholarship_description: "Prix de 5 000 £ destiné aux étudiants et jeunes innovateurs africains pour transformer des idées audacieuses en solutions concrètes pour le continent. Ce programme est offert par l'Oxford Africa Business Alliance et vise à soutenir l'entrepreneuriat en Afrique avec un financement de projet.",
+    scholarship_description: "Prix de 5 000 £ destiné aux étudiants et jeunes innovateurs africains pour transformer des idées audacieuses en solutions concrètes pour le continent.",
     official_link: "https://afri-carrieres.com/2026/02/oxford-africa-conference-innovation-seed-fund.html",
     posted_user_email: ADMIN_EMAIL
   },
@@ -36,7 +36,7 @@ const newScholarships = [
     application_fees: 0,
     service_charge: 0,
     application_deadline: "2026-03-15",
-    scholarship_description: "Destiné aux étudiants réfugiés dans un premier pays d'asile souhaitant poursuivre un Master en France. Couvre les frais de vie et de scolarité. Programme coordonné par l'AUF (Agence universitaire de la Francophonie) et le HCR (Haut Commissariat aux Réfugiés).",
+    scholarship_description: "Destiné aux étudiants réfugiés dans un premier pays d'asile souhaitant poursuivre un Master en France. Couvre les frais de vie et de scolarité.",
     official_link: "https://afri-carrieres.com/2026/02/programme-univr-france.html",
     posted_user_email: ADMIN_EMAIL
   },
@@ -54,7 +54,7 @@ const newScholarships = [
     application_fees: 0,
     service_charge: 0,
     application_deadline: "2026-06-30",
-    scholarship_description: "Permet aux jeunes réfugiés d'obtenir un diplôme universitaire dans leur pays d'accueil. Inclut frais de scolarité, logement et mentorat. Programme offert par le HCR dans 59 pays d'asile à travers le monde.",
+    scholarship_description: "Permet aux jeunes réfugiés d'obtenir un diplôme universitaire dans leur pays d'accueil. Inclut frais de scolarité, logement et mentorat.",
     official_link: "https://afri-carrieres.com/2026/02/programme-de-bourses-dafi.html",
     posted_user_email: ADMIN_EMAIL
   },
@@ -72,7 +72,7 @@ const newScholarships = [
     application_fees: 0,
     service_charge: 0,
     application_deadline: "2026-03-13",
-    scholarship_description: "Soutien à l'entrepreneuriat féminin durable via un programme d'incubation complet pour les projets à fort impact environnemental. Offre accompagnement entrepreneurial, financement de projet et mentorat pour les startups et coopératives africaines.",
+    scholarship_description: "Soutien à l'entrepreneuriat féminin durable via un programme d'incubation complet pour les projets à fort impact environnemental.",
     official_link: "https://afri-carrieres.com/2026/02/programme-ileda.html",
     posted_user_email: ADMIN_EMAIL
   },
@@ -90,7 +90,7 @@ const newScholarships = [
     application_fees: 0,
     service_charge: 0,
     application_deadline: "2026-03-31",
-    scholarship_description: "Exemption de frais de scolarité, logement universitaire, allocation mensuelle et année préparatoire linguistique offerte. Financement complet du gouvernement roumain pour les étudiants étrangers exceptionnels dans toutes les disciplines (sauf Médecine/Pharmacie).",
+    scholarship_description: "Exemption de frais de scolarité, logement universitaire, allocation mensuelle et année préparatoire linguistique offerte.",
     official_link: "https://afri-carrieres.com/2026/02/bourses-du-gouvernement-roumain.html",
     posted_user_email: ADMIN_EMAIL
   },
@@ -108,62 +108,58 @@ const newScholarships = [
     application_fees: 0,
     service_charge: 0,
     application_deadline: "2026-03-15",
-    scholarship_description: "Programme intensif de 10 semaines pour former les futurs leaders africains au plaidoyer et à la mise en œuvre de projets communautaires. Formation gratuite en leadership, ODD, et développement durable. Ouvert aux étudiants âgés de 16-25 ans.",
+    scholarship_description: "Programme intensif de 10 semaines pour former les futurs leaders africains au plaidoyer et à la mise en œuvre de projets communautaires.",
     official_link: "https://afri-carrieres.com/2026/02/sdgs-campus-ambassador-programme-2.html",
     posted_user_email: ADMIN_EMAIL
   }
 ];
 
-const addNewScholarships = async () => {
-    console.log("🚀 Adding 6 new scholarships...\n");
+const deleteAndReadd = async () => {
+    console.log("🖼️ Deleting old scholarships and re-adding with proper logos...\n");
 
-    // First, fetch existing scholarships to avoid duplicates
     try {
         const existingRes = await axios.get(`${API_BASE_URL}/top-scholarships`);
-        const existing = existingRes.data || [];
-        console.log(`📊 Current scholarships in database: ${existing.length}\n`);
+        const scholarships = existingRes.data || [];
 
-        for (const scholarship of newScholarships) {
-            // Check if scholarship already exists
-            const exists = existing.some(
-                (s) => s.scholarship_name === scholarship.scholarship_name
-            );
-
-            if (exists) {
-                console.log(`⏭️ Already exists: ${scholarship.scholarship_name}`);
-                continue;
+        // Delete the 6 scholarships with bad logos
+        for (const newScholarship of newScholarships) {
+            const existing = scholarships.find(s => s.scholarship_name === newScholarship.scholarship_name);
+            
+            if (existing) {
+                try {
+                    const deleteRes = await axios.delete(`${API_BASE_URL}/scholarships/${existing._id}`);
+                    console.log(`🗑️ Deleted: ${newScholarship.scholarship_name}`);
+                } catch (err) {
+                    console.log(`⚠️ Could not delete: ${newScholarship.scholarship_name}`);
+                }
             }
+        }
 
+        console.log("\n✅ Now adding with proper logos...\n");
+
+        // Re-add them
+        for (const scholarship of newScholarships) {
             try {
                 const response = await axios.post(
                     `${API_BASE_URL}/scholarships`,
                     scholarship,
                     {
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
+                        headers: { "Content-Type": "application/json" }
                     }
                 );
 
                 if (response.status === 200 || response.status === 201) {
-                    console.log(`✅ Added: ${scholarship.scholarship_name}`);
-                } else {
-                    console.error(
-                        `Failed: ${scholarship.scholarship_name}. Status: ${response.status}`
-                    );
+                    console.log(`✅ Added with logo: ${scholarship.scholarship_name}`);
                 }
             } catch (err) {
-                console.error(
-                    `❌ Error adding ${scholarship.scholarship_name}:`,
-                    err.response?.data || err.message
-                );
+                console.error(`❌ Error: ${scholarship.scholarship_name}`, err.response?.data?.message || "");
             }
         }
 
-        console.log("\n✨ Done! All new scholarships processed");
+        console.log("\n✨ Done! All scholarships now have proper images!");
     } catch (err) {
-        console.error("❌ Error fetching existing scholarships:", err.message);
+        console.error("❌ Error:", err.message);
     }
 };
 
-addNewScholarships();
+deleteAndReadd();

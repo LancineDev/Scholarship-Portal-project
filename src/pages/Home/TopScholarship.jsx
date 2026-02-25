@@ -24,11 +24,19 @@ const TopScholarship = () => {
             {/* Top scholarship cards */ }
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:px-3 lg:px-6 mb-6">
                 {
-                    scholarships.slice(0, 6).map(scholarship => (
-                        <div key={ scholarship._id } className="group transform transition hover:scale-105 hover:shadow-xl rounded-lg">
-                            <ScholarshipCard scholarship={ scholarship } />
-                        </div>
-                    ))
+                    // Deduplicate by university and show up to 6 universities
+                    (() => {
+                        const map = new Map();
+                        for (const s of scholarships) {
+                            const key = (s.university_name || '').trim();
+                            if (!map.has(key)) map.set(key, s);
+                        }
+                        return Array.from(map.values()).slice(0, 6).map(scholarship => (
+                            <div key={ scholarship._id } className="group transform transition hover:scale-105 hover:shadow-xl rounded-lg">
+                                <ScholarshipCard scholarship={ scholarship } />
+                            </div>
+                        ));
+                    })()
                 }
             </div>
 

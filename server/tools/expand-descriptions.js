@@ -2,6 +2,36 @@ import axios from "axios";
 
 const API_BASE_URL = "https://scholarship-portalbd-server.vercel.app";
 
+const run = async () => {
+  try {
+    const res = await axios.get(`${API_BASE_URL}/scholarships`);
+    const items = res.data || [];
+
+    for (const it of items) {
+      if (it.scholarship_description && it.scholarship_description.length < 100) {
+        try {
+          await axios.put(`${API_BASE_URL}/scholarships/${it._id}`, {
+            ...it,
+            scholarship_description: it.scholarship_description + " - Description updated."
+          });
+          console.log(`Expanded ${it._id}`);
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+
+    console.log("Expand descriptions done");
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+run();
+import axios from "axios";
+
+const API_BASE_URL = "https://scholarship-portalbd-server.vercel.app";
+
 const expandedDescriptions = {
   "University of Delhi": "Bourse complète du gouvernement indien couvrant 100% des frais de scolarité, hébergement, allocation mensuelle (jusqu'à 500$/mois), billet d'avion international et assurance santé. Ouverte aux étudiants des pays partenaires de l'India Council for Cultural Relations (ICCR). Programme soutenu par le ministère des Affaires extérieures de l'Inde. Les bourses couvrent également une formation linguistique en hindi de 6 mois avant le début des études. Plus de 100 universités indiennes participantes. Cursus disponibles : Bachelor, Master et Doctorat. Sélection basée sur le mérite académique et les résultats aux tests standardisés.",
   

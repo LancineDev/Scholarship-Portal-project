@@ -1,6 +1,40 @@
 import axios from "axios";
 
 const API_BASE_URL = "https://scholarship-portalbd-server.vercel.app";
+
+const scholarships = [
+  {
+    scholarship_name: "Re-added Scholarship",
+    university_name: "Re-Example University",
+    university_logo: "https://example.com/re-logo.png",
+    university_country: "Global",
+    university_city: "Virtual",
+    subject_category: "Arts",
+    scholarship_category: "Full Funding",
+    degree: "Undergraduate",
+    tuition_fees: 0,
+    application_deadline: "2026-06-01",
+    scholarship_description: "Re-adding example scholarship.",
+    official_link: "https://example.com/re",
+    posted_user_email: "portal@gmail.com"
+  }
+];
+
+const run = async () => {
+  for (const s of scholarships) {
+    try {
+      await axios.post(`${API_BASE_URL}/scholarships`, s);
+      console.log(`Added ${s.scholarship_name}`);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+};
+
+run();
+import axios from "axios";
+
+const API_BASE_URL = "https://scholarship-portalbd-server.vercel.app";
 const ADMIN_EMAIL = "portal@gmail.com";
 
 const scholarships = [
@@ -48,7 +82,7 @@ const scholarships = [
     subject_category: "Multi-disciplinary",
     scholarship_category: "Full Funding",
     degree: "Masters",
-    tuition_fees: 10000,
+    tuition_fees: 0,
     application_fees: 0,
     service_charge: 0,
     application_deadline: "2026-03-12",
@@ -58,7 +92,7 @@ const scholarships = [
   {
     scholarship_name: "Think Big Scholarship",
     university_name: "University of Bristol",
-    university_logo: "https://upload.wikimedia.org/wikipedia/en/9/9e/University_of_Bristol_logo.png",
+    university_logo: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/University_of_Bristol_logo.png/1200px-University_of_Bristol_logo.png",
     university_country: "UK",
     university_city: "Bristol",
     university_rank: "Top 60 QS",

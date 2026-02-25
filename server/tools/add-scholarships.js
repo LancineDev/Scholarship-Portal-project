@@ -1,6 +1,40 @@
 import axios from "axios";
 
 const API_BASE_URL = "https://scholarship-portalbd-server.vercel.app";
+
+const scholarships = [
+  {
+    scholarship_name: "Example Scholarship A",
+    university_name: "Example University",
+    university_logo: "https://example.com/logo-a.png",
+    university_country: "USA",
+    university_city: "New York",
+    subject_category: "STEM",
+    scholarship_category: "Partial",
+    degree: "Masters",
+    tuition_fees: 1000,
+    application_deadline: "2026-02-01",
+    scholarship_description: "An example scholarship.",
+    official_link: "https://example.com/a",
+    posted_user_email: "portal@gmail.com"
+  }
+];
+
+const run = async () => {
+  for (const s of scholarships) {
+    try {
+      await axios.post(`${API_BASE_URL}/scholarships`, s);
+      console.log(`Added ${s.scholarship_name}`);
+    } catch (err) {
+      console.error(`Failed ${s.scholarship_name}`, err.message);
+    }
+  }
+};
+
+run();
+import axios from "axios";
+
+const API_BASE_URL = "https://scholarship-portalbd-server.vercel.app";
 const ADMIN_EMAIL = "portal@gmail.com";
 
 const scholarships = [
@@ -98,7 +132,7 @@ const scholarships = [
     application_fees: 60,
     service_charge: 208,
     application_deadline: "2026-05-02",
-    scholarship_description: "Master's degree in Data Science (2 years, full-time) at the University of Padua. Annual tuition fees: €2,739. Application fee: €60. Service charge: €208. Official Website: https://www.unipd.it/en/data-science",
+    scholarship_description: "Master's degree in Data Science (2 years, full-time) at the University of Padua. Official Website: https://www.unipd.it/en/data-science",
   },
 ];
 

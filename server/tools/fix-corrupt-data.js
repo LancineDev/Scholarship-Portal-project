@@ -1,6 +1,41 @@
 import axios from "axios";
 
 const API_BASE_URL = "https://scholarship-portalbd-server.vercel.app";
+
+const run = async () => {
+  try {
+    const res = await axios.get(`${API_BASE_URL}/scholarships`);
+    const items = res.data || [];
+    for (const it of items) {
+      let changed = false;
+      if (!it.university_country) {
+        it.university_country = "Unknown";
+        changed = true;
+      }
+      if (!it.application_deadline) {
+        it.application_deadline = "TBD";
+        changed = true;
+      }
+
+      if (changed) {
+        try {
+          await axios.put(`${API_BASE_URL}/scholarships/${it._id}`, it);
+          console.log(`Fixed ${it._id}`);
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+    console.log("Fix corrupt data completed");
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+run();
+import axios from "axios";
+
+const API_BASE_URL = "https://scholarship-portalbd-server.vercel.app";
 const ADMIN_EMAIL = "portal@gmail.com";
 
 const completeScholarships = [
@@ -8,6 +43,7 @@ const completeScholarships = [
     university_name: "University of Delhi",
     university_logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/84/University_of_Delhi.png/220px-University_of_Delhi.png",
     scholarship_category: "Full Funding",
+    universidade_country: "India",
     university_country: "India",
     university_city: "New Delhi",
     university_rank: "#407",

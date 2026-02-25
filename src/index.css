@@ -68,6 +68,19 @@
         --accent-800: #222844;
         --accent-900: #111422;
         --accent-950: #090a11;
+
+        /* Warning - Yellow / Amber */
+        --warning-50: #fff8e5;
+        --warning-100: #fff1cc;
+        --warning-200: #ffe299;
+        --warning-300: #ffd366;
+        --warning-400: #ffc433;
+        --warning-500: #fbbf24;
+        --warning-600: #c9951b;
+        --warning-700: #8e6b13;
+        --warning-800: #57420b;
+        --warning-900: #2b2105;
+        --warning-950: #161002;
     }
 
     .dark {
@@ -130,6 +143,19 @@
         --accent-800: #bbc1dd;
         --accent-900: #dde0ee;
         --accent-950: #eeeff6;
+
+        /* Warning - Yellow / Amber (dark mode adjusted) */
+        --warning-50: #100800;
+        --warning-100: #1a0c00;
+        --warning-200: #332300;
+        --warning-300: #4c3b00;
+        --warning-400: #665300;
+        --warning-500: #806b00;
+        --warning-600: #a07f1a;
+        --warning-700: #c4943b;
+        --warning-800: #e8c78a;
+        --warning-900: #fff6dd;
+        --warning-950: #fffceb;
 
         --bg: #000000;
     }

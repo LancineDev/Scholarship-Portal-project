@@ -1,6 +1,34 @@
 import axios from "axios";
 
 const API_BASE_URL = "https://scholarship-portalbd-server.vercel.app";
+
+const run = async () => {
+  try {
+    const res = await axios.get(`${API_BASE_URL}/scholarships`);
+    const items = res.data || [];
+
+    for (const it of items) {
+      // Example normalization
+      if (typeof it.tuition_fees === 'string') {
+        it.tuition_fees = parseFloat(it.tuition_fees.replace(/[^0-9.]/g, '')) || 0;
+        try {
+          await axios.put(`${API_BASE_URL}/scholarships/${it._id}`, it);
+          console.log(`Normalized ${it._id}`);
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+    console.log('fix-data-v2 completed');
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+run();
+import axios from "axios";
+
+const API_BASE_URL = "https://scholarship-portalbd-server.vercel.app";
 const ADMIN_EMAIL = "portal@gmail.com";
 
 const completeScholarships = [
@@ -197,50 +225,25 @@ const fixByIds = async () => {
       const existingOne = existing.find(
         (s) => s.scholarship_description && 
         s.scholarship_description.includes("Bourse") &&
-        (s.scholarship_description.includes(scholarship.university_name.split(" ")[0]) ||
-         scholarship.university_name.includes("ETH"))
+        (s.scholarship_description.includes(scholarship.university_name.split(" ")[0]) || s.university_name === scholarship.university_name)
       );
 
       if (existingOne) {
-        const todayDate = new Date().toISOString().split("T")[0];
-        
-        const updateData = {
-          university_name: scholarship.university_name,
-          university_logo: scholarship.university_logo,
-          scholarship_category: scholarship.scholarship_category,
-          university_location: {
-            country: scholarship.university_country,
-            city: scholarship.university_city,
-          },
-          application_deadline: scholarship.application_deadline,
-          subject_name: scholarship.subject_category,
-          post_date: todayDate,
-          stipend: scholarship.tuition_fees,
-          university_rank: scholarship.university_rank,
-          service_charge: scholarship.service_charge,
-          application_fees: scholarship.application_fees,
-          degree_name: scholarship.degree,
-          posted_user_email: ADMIN_EMAIL,
-          official_link: scholarship.official_link,
-        };
-
         try {
-          await axios.put(
-            `${API_BASE_URL}/update-scholarships/${existingOne._id}`,
-            updateData
-          );
-          console.log(`✅ Fixed: ${scholarship.university_name}`);
-        } catch (error) {
-          console.log(`❌ Error fixing ${scholarship.university_name}:`, error.message);
+          await axios.put(`${API_BASE_URL}/update-scholarships/${existingOne._id}`, {
+            university_logo: scholarship.university_logo,
+            official_link: scholarship.official_link
+          });
+          console.log(`✅ Updated logo/link for: ${scholarship.university_name}`);
+        } catch (err) {
+          console.error(`❌ Error updating ${scholarship.university_name}:`, err.message);
         }
-      } else {
-        console.log(`⚠️  Not found: ${scholarship.university_name}`);
       }
     }
 
-    console.log("\n✨ Done!");
-  } catch (error) {
-    console.error("Error:", error.message);
+    console.log("\n✨ Done updating by IDs");
+  } catch (err) {
+    console.error("❌ Error:", err.message);
   }
 };
 

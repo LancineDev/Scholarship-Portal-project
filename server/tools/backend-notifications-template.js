@@ -1,3 +1,11 @@
+// Template for backend notification payloads
+
+export const buildNotification = ({ title, body, link }) => ({
+  title: title || "New Notification",
+  body: body || "You have a new notification.",
+  link: link || null,
+  created_at: new Date().toISOString()
+});
 // FILE: routes/notifications.js (Backend Express.js Example)
 // This is a TEMPLATE for implementing the backend API endpoints
 

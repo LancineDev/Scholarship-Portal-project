@@ -3,6 +3,7 @@ import ScholarshipCard from "../../layout/ScholarshipCard/ScholarshipCard";
 import Loading from "../../components/Loading";
 import useScholarshipData from "../../hooks/useScholarshipData";
 import { useEffect, useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import Title from "../../components/Title";
 
 const AllScholarship = () => {
@@ -73,8 +74,14 @@ const AllScholarship = () => {
         return Array.from(map.values());
     };
 
-    // University filter state
+    // University / country / topic filter state (support ?country= and ?topic=)
+    const { search } = useLocation();
+    const params = new URLSearchParams(search);
+    const initialCountry = params.get('country') || "";
+    const initialTopic = params.get('topic') || "";
     const [universityFilter, setUniversityFilter] = useState("");
+    const [countryFilter, setCountryFilter] = useState(initialCountry);
+    const [topicFilter, setTopicFilter] = useState(initialTopic);
     const universitiesList = uniqueByUniversity(scholarships).map(s => s.university_name).filter(Boolean);
 
     const handleSubmit = (e) => {
@@ -96,36 +103,40 @@ const AllScholarship = () => {
                     <input type="text" placeholder="Rechercher par Bourse, Université, Diplôme" className="bg-transparent w-full focus:outline-none pr-4 font-semibold border-0 focus:ring-0 px-0 py-0" name="topic" value={ query } onChange={ handleSearchChange } /><button type="submit" className="flex flex-row items-center justify-center min-w-[130px] px-4 rounded font-medium tracking-wide border disabled:cursor-not-allowed disabled:opacity-50 transition ease-in-out duration-150 text-base bg-primary-500 border-transparent py-1.5 h-[38px] -mr-3 text-black">Chercher</button>
                 </form>
 
-                {/* Controls: university filter */}
-                <div className="mb-4 flex items-center gap-4">
+                {/* Controls: university / country / topic filters */}
+                <div className="mb-4 flex items-center gap-4 flex-wrap">
                     <label className="text-sm text-gray-600">Université:</label>
                     <select value={ universityFilter } onChange={ (e) => setUniversityFilter(e.target.value) } className="border rounded px-3 py-1 text-sm">
                         <option value="">Toutes</option>
                         { universitiesList.map(u => <option key={u} value={u}>{u}</option>) }
                     </select>
+
+                    <label className="text-sm text-gray-600">Pays:</label>
+                    <input placeholder="Filtrer par pays" value={ countryFilter } onChange={ (e) => setCountryFilter(e.target.value) } className="border rounded px-3 py-1 text-sm" />
+
+                    <label className="text-sm text-gray-600">Topic:</label>
+                    <input placeholder="Filtrer par sujet" value={ topicFilter } onChange={ (e) => setTopicFilter(e.target.value) } className="border rounded px-3 py-1 text-sm" />
                 </div>
 
                 {/* Scholarship cards */ }
-                <div className={ `grid md:px-3 lg:px-6 mb-6 ${filteredScholarships.length === 0 ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2 gap-4"}` }>
+                <div className={`grid md:px-3 lg:px-6 mb-6 ${filteredScholarships.length === 0 ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2 gap-4"}`}>
                     {
-                        searchTerm === "" ? (
-                            // Show all scholarships when searchTerm is empty (deduplicate by university)
-                            uniqueByUniversity(scholarships)
+                        (() => {
+                            const base = searchTerm === "" ? uniqueByUniversity(scholarships) : uniqueByUniversity(filteredScholarships);
+                            const list = base
                                 .filter(s => !universityFilter || s.university_name === universityFilter)
-                                .map(scholarship => (
-                                    <ScholarshipCard key={ scholarship._id } scholarship={ scholarship } />
-                                ))
-                        ) : filteredScholarships.length === 0 ? (
-                            // Show message when no results are found
-                            <div className="text-red-400 text-2xl font-semibold flex items-center justify-center">No scholarships found.</div>
-                        ) : (
-                            // Show filtered scholarships (deduplicate by university)
-                            uniqueByUniversity(filteredScholarships)
-                                .filter(s => !universityFilter || s.university_name === universityFilter)
-                                .map(scholarship => (
-                                    <ScholarshipCard key={ scholarship._id } scholarship={ scholarship } />
-                                ))
-                        ) }
+                                .filter(s => !countryFilter || (s.university_location && String(s.university_location.country || s.university_location).toLowerCase().includes(countryFilter.toLowerCase())))
+                                .filter(s => !topicFilter || (String(s.scholarship_category || s.subject_name || '').toLowerCase().includes(topicFilter.toLowerCase())));
+
+                            if (list.length === 0) {
+                                return <div className="text-red-400 text-2xl font-semibold flex items-center justify-center">No scholarships found.</div>;
+                            }
+
+                            return list.map(scholarship => (
+                                <ScholarshipCard key={ scholarship._id } scholarship={ scholarship } />
+                            ));
+                        })()
+                    }
                 </div>
             </section>
         </>

@@ -81,6 +81,9 @@
         --warning-800: #57420b;
         --warning-900: #2b2105;
         --warning-950: #161002;
+
+        /* Footer color */
+        --footer-bg: #1e285c;
     }
 
     .dark {
@@ -114,7 +117,7 @@
         --primary-300: #163e83;
         --primary-400: #1e53ae;
         --primary-500: #2567da;
-        --primary-600: #5186e1;
+        --primary-600: #e19951;
         --primary-700: #7ca4e9;
         --primary-800: #a8c2f0;
         --primary-900: #d3e1f8;
@@ -158,6 +161,9 @@
         --warning-950: #fffceb;
 
         --bg: #000000;
+
+        /* Footer color (dark mode) */
+        --footer-bg: #4e71c2;
     }
 }
 
@@ -182,7 +188,7 @@ h6 {
 
 footer {
     clip-path: polygon(0 0, 100% 13%, 100% 100%, 0% 100%);
-    background-color: var(--accent-100);
+    background-color: var(--footer-bg) !important; /* #CD5C5C */
 }
 
 @media (max-width: 768px) {
@@ -209,5 +215,5 @@ footer {
 
 /* subtle global body enhancement for aesthetics (light effect) */
 body {
-    background-image: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.02) 50%);
+    background-image: linear-gradient(180deg, transparent 0%, rgba(27, 103, 196, 0.02) 50%);
 }

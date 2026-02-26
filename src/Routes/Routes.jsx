@@ -3,6 +3,7 @@ import Root from "../layout/Root";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import AllScholarship from "../pages/AllScholarship/AllScholarship";
+import CountryIndex from "../pages/CountryIndex/CountryIndex";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../pages/Dashboard/Dashboard";
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path: "all-scholarship",
                 element: <AllScholarship />,
+            },
+            {
+                path: "countries",
+                element: <CountryIndex />,
             },
             {
                 path: "login",

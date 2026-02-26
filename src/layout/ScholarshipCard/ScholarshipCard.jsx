@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import "./scholarship-card.css";
 
-const ScholarshipCard = ({ scholarship }) => {
+const ScholarshipCard = ({ scholarship, compact = false }) => {
     if (!scholarship) return null;
     
     const {
@@ -62,7 +63,7 @@ const ScholarshipCard = ({ scholarship }) => {
     const location = university_location?.country || "Unknown";
 
     // Variant selection (deterministic): use _id or university name to alternate colors
-    const variant = (() => {
+    const colorVariant = (() => {
         const seed = String(_id || university_name || "");
         let sum = 0;
         for (let i = 0; i < seed.length; i++) sum += seed.charCodeAt(i);
@@ -79,127 +80,77 @@ const ScholarshipCard = ({ scholarship }) => {
         return deadline <= cutoffDate;
     };
 
-    const cardBase = "group w-full max-w-4xl rounded-2xl shadow-sm hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 p-6 relative overflow-hidden";
-    const cardVariant = variant === 'warning'
-        ? "bg-warning-50 dark:bg-warning-900 border border-warning-200 dark:border-warning-700"
-        : "bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700";
-
     return (
-        <div className={`${cardBase} ${cardVariant}`}>
-            <div className={`absolute left-0 top-0 bottom-0 w-1 ${variant === 'warning' ? 'bg-warning-500' : 'bg-green-500'}`} />
-            {/* status badge */}
-            <div className="absolute top-4 right-4">
-                {isOpen() ? (
-                    <span role="status" aria-label="Bourse Ouverte" className="inline-flex items-center gap-2 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M5 10l3 3 7-7" strokeLinecap="round" strokeLinejoin="round" stroke="white" />
-                        </svg>
-                        <span className="leading-none">OUVERT</span>
-                    </span>
+        <div className={`sc-card ${compact ? 'compact' : ''}`}>
+            <div className="sc-accent-bar" />
+
+            <div className="row between" style={{ marginBottom: compact ? 14 : 18 }}>
+                { isOpen() ? (
+                    <span className="sc-badge-open" role="status" aria-label="Open">OUVERT</span>
                 ) : (
-                    <span role="status" aria-label="À venir" className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M12 8v4l3 3" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                        <span className="leading-none">À VENIR</span>
-                    </span>
-                )}
+                    <span className="sc-badge-coming" role="status" aria-label="Coming">À VENIR</span>
+                ) }
+
+                <div className="sc-actions">
+                    <button onClick={ toggleSave } aria-pressed={ saved } aria-label={ saved ? 'Unsave' : 'Save' } className={`sc-action-btn ${saved ? 'saved' : ''}`}>
+                        {/* heart / saved icon */}
+                        { saved ? (
+                            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.657 3.172 11.828a4 4 0 010-5.656z"/></svg>
+                        ) : (
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                        ) }
+                    </button>
+
+                    <button onClick={ shareScholarship } aria-label="Share" className="sc-action-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                    </button>
+
+                    <a href={ scholarship.apply_link || '#' } target="_blank" rel="noopener noreferrer" className="sc-action-btn apply" aria-label="Apply">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7"/></svg>
+                    </a>
+                </div>
             </div>
 
-            {/* quick actions: save, share, quick apply (visible on hover) */}
-            <div className="absolute top-16 right-4 flex items-center gap-2 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
-                <button onClick={ toggleSave } aria-pressed={ saved } aria-label={ saved ? 'Unsave' : 'Save' } className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-sm hover:scale-105 transition">
-                    { saved ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-red-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.657 3.172 11.828a4 4 0 010-5.656z" />
-                        </svg>
-                    ) : (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 8.5A4.5 4.5 0 017.5 4h0A4.5 4.5 0 0112 8.5 4.5 4.5 0 0116.5 4h0A4.5 4.5 0 0121 8.5c0 6-9 11.5-9 11.5S3 14.5 3 8.5z" />
-                        </svg>
-                    ) }
-                </button>
-
-                <button onClick={ shareScholarship } aria-label="Share" className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-sm hover:scale-105 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 12v.01M20 12v.01M12 4v.01M12 20v.01M7.05 7.05l.01.01M16.95 16.95l.01.01M16.95 7.05l.01.01M7.05 16.95l.01.01" />
-                    </svg>
-                </button>
-
-                <a href={ scholarship.apply_link || '#' } target="_blank" rel="noopener noreferrer" aria-label="Apply" className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-sm hover:scale-105 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                </a>
-            </div>
-
-            <div className="flex gap-6 items-start">
-                {/* logo */}
-                <div className={`flex-shrink-0 w-20 h-20 rounded-xl bg-primary-50 flex items-center justify-center ring-1 ${variant === 'warning' ? 'ring-warning-200 dark:ring-warning-700' : 'ring-green-200 dark:ring-green-700'} overflow-hidden`}>
-                    <img
-                        className="w-16 h-16 object-cover rounded-lg"
-                        src={ university_logo }
-                        alt={ `${university_name} logo` }
-                        onError={(e) => { e.target.src = "/logo.png"; }}
-                    />
+            <div className="row start gap-20">
+                <div className="sc-logo-wrap" style={ compact ? { width: 48, height: 48 } : undefined }>
+                    <img src={ university_logo } alt={`${university_name} logo`} onError={(e)=>{e.target.src='/logo.png'}} />
                 </div>
 
-                {/* main content */}
                 <div className="flex-1">
-                    <div className="flex items-center justify-between gap-4">
-                        <div>
-                            <div className="flex items-center gap-2">
-                                <span className="inline-flex text-xs font-medium uppercase bg-green-100 text-green-800 px-2 py-0.5 rounded-full">{ subject_name }</span>
-                            </div>
-                            <h3 className="text-2xl font-extrabold text-green-800 mt-2">{ university_name }</h3>
-                        </div>
-
-                        <div className="hidden sm:flex sm:flex-col sm:items-end sm:gap-2">
-                            <div className="text-sm text-gray-500">{ location }</div>
-                            <div className="text-sm font-medium text-gray-700">{ application_fees } USD</div>
+                    <span className="sc-subject-pill">{subject_name}</span>
+                    <div className={`row between start mt-8 ${compact ? '' : 'gap-10'}`}
+                        style={ compact ? undefined : undefined }>
+                        <h3 className="sc-university-name" style={ compact ? { fontSize: 20 } : undefined }>{ compact ? (university_name.length > 24 ? university_name.slice(0,22)+'…' : university_name) : university_name }</h3>
+                        <div className="text-right shrink-0">
+                            <div className="sc-fees">{ application_fees ? `${application_fees} USD` : 'Gratuit' }</div>
+                            { !compact && <div style={{ fontSize: 11, color: 'var(--c-sub)', marginTop: 2 }}>{ location }</div> }
                         </div>
                     </div>
 
-                    {/* optional short description snippet */}
-                    { (scholarship.description || scholarship.summary) && (
-                        <p className="mt-3 text-sm text-gray-600 line-clamp-2">{ (scholarship.description || scholarship.summary).slice(0, 140) }{ (scholarship.description || scholarship.summary).length > 140 ? '...' : '' }</p>
+                    { !compact && (scholarship.description || scholarship.summary) && (
+                        <p className="sc-description">{ (scholarship.description || scholarship.summary).slice(0, 240) }</p>
                     ) }
 
-                    <div className="mt-4 flex items-center gap-3 flex-wrap">
-                        <span className="bg-primary-50 text-primary-700 rounded-full px-3 py-1 text-sm whitespace-nowrap">{ scholarship_category }</span>
-                        <span className="text-gray-500 text-sm flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            { location }
-                        </span>
-                        <span className="ml-auto sm:ml-0 text-sm text-gray-500 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3" />
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            { application_deadline }
-                        </span>
+                    <div className="sc-divider" />
+
+                    <div className="row wrap gap-14">
+                        <span className="sc-category-pill">{ scholarship_category }</span>
+                        <div className="sc-dot" />
+                        <span className="sc-meta-item">{ location }</span>
+                        <div className="sc-dot" />
+                        <span className="sc-meta-item">{ application_deadline }</span>
                     </div>
 
-                    <div className="mt-4 flex items-center gap-3">
-                        <Link to={ `/scholarships/${_id}` } className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-primary-200 text-primary-700 hover:bg-primary-50 transition">
-                            Détails
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                        </Link>
-
-                        { scholarship.apply_link ? (
-                            <a href={ scholarship.apply_link } target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-secondary-500 text-white hover:bg-secondary-600 transition">
-                                Postuler
-                            </a>
-                        ) : (
-                            <button disabled className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gray-100 text-gray-400 cursor-not-allowed">Postuler</button>
-                        ) }
-                    </div>
+                    { !compact && (
+                        <div className="row gap-10 mt-18">
+                            <Link to={`/scholarships/${_id}`} className="sc-btn-detail">Détails <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7"/></svg></Link>
+                            { scholarship.apply_link ? (
+                                <a href={ scholarship.apply_link } target="_blank" rel="noopener noreferrer" className="sc-btn-apply">Postuler</a>
+                            ) : (
+                                <button disabled className="sc-btn-apply" style={{opacity:0.6}}>Postuler</button>
+                            ) }
+                        </div>
+                    ) }
                 </div>
             </div>
         </div>
@@ -208,6 +159,7 @@ const ScholarshipCard = ({ scholarship }) => {
 
 ScholarshipCard.propTypes = {
     scholarship: PropTypes.object,
+    compact: PropTypes.bool,
 };
 
 export default ScholarshipCard;

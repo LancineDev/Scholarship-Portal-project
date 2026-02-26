@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://scholarship-portalbd-server.vercel.app";
+
 
 const run = async () => {
   try {
